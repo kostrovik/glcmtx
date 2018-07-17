@@ -29,15 +29,14 @@ test {
 }
 
 // создать толстый jar вместе с зависимостями
-/*jar {
+jar {
     from {
         manifest.attributes("Main-Class": mainClassName);
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
-}*/
+}
 
 // создать исполняемый jar
-/*
-jar {
+/*jar {
     manifest.attributes('Main-Class': mainClassName);
 }*/
