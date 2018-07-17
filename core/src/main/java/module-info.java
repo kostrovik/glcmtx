@@ -1,0 +1,3 @@
+module core {
+    requires configurator;
+}
