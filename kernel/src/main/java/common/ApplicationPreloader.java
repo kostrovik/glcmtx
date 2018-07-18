@@ -1,6 +1,6 @@
-package application;
+package common;
 
-import application.interfaces.EventListenerInterface;
+import interfaces.EventListenerInterface;
 import javafx.application.Platform;
 import javafx.application.Preloader;
 import javafx.geometry.Insets;
@@ -20,7 +20,7 @@ import java.util.Map;
 /**
  * project: glcmtx
  * author:  kostrovik
- * date:    17/07/2018
+ * date:    18/07/2018
  * github:  https://github.com/kostrovik/glcmtx
  */
 public class ApplicationPreloader extends Preloader {
@@ -98,15 +98,15 @@ public class ApplicationPreloader extends Preloader {
     }
 
     @Override
-    public boolean handleErrorNotification(ErrorNotification errorNotification) {
+    public boolean handleErrorNotification(Preloader.ErrorNotification errorNotification) {
         notifications.setText(errorNotification.getDetails());
         disableForm(false);
         return true;
     }
 
     @Override
-    public void handleStateChangeNotification(StateChangeNotification state) {
-        if (state.getType() == StateChangeNotification.Type.BEFORE_START) {
+    public void handleStateChangeNotification(Preloader.StateChangeNotification state) {
+        if (state.getType() == Preloader.StateChangeNotification.Type.BEFORE_START) {
             Platform.runLater(() -> stage.hide());
         }
     }

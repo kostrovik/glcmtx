@@ -1,4 +1,4 @@
-package application;
+package common;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -6,19 +6,17 @@ import javafx.application.Preloader;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
 
 /**
  * project: glcmtx
  * author:  kostrovik
- * date:    17/07/2018
+ * date:    18/07/2018
  * github:  https://github.com/kostrovik/glcmtx
  */
 public class AppCore extends Application {
-    private static Logger logger = LogManager.getLogger(AppCore.class);
+    //    private static Logger logger = LoggerFactory.getLogger(AppCore.class);
     private static Preloader preloader;
     private static Stage mainStage;
 
@@ -46,7 +44,7 @@ public class AppCore extends Application {
                 Stage primaryStage = new Stage();
                 preloader.start(primaryStage);
             } catch (Exception error) {
-                logger.error("Ошибка запуска preloader.", error);
+//                logger.error("Ошибка запуска preloader.", error);
             }
         });
 
@@ -54,7 +52,7 @@ public class AppCore extends Application {
     }
 
     public void start(Stage mainWindow) {
-        logger.info("Запуск приложения.");
+//        logger.info("Запуск приложения.");
 
         mainStage = mainWindow;
         setStageSize(mainWindow);

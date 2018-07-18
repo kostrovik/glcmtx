@@ -1,42 +1,11 @@
-plugins {
-    id 'java'
-    id 'application'
-    id 'maven'
+task cleanAll(type: GradleBuild) {
+    tasks = ['kernel:clean']
 }
 
-group 'com.github.kostrovik'
-version '1.0-SNAPSHOT'
-
-sourceCompatibility = 10
-targetCompatibility = 10
-
-mainClassName = 'application.AppCore'
-
-repositories {
-    mavenCentral()
-    jcenter()
+task linkAll(type: GradleBuild) {
+    tasks = ['kernel:link']
 }
 
-dependencies {
-    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.11.0'
-    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.0'
-    testCompile("org.junit.jupiter:junit-jupiter-api:5.2.0")
-    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.2.0")
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.8.1'
 }
-
-test {
-    useJUnitPlatform()
-}
-
-// создать толстый jar вместе с зависимостями
-jar {
-    from {
-        manifest.attributes("Main-Class": mainClassName);
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-}
-
-// создать исполняемый jar
-/*jar {
-    manifest.attributes('Main-Class': mainClassName);
-}*/

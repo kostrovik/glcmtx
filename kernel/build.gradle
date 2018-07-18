@@ -1,0 +1,58 @@
+plugins {
+    id 'java'
+}
+
+group 'com.github.kostrovik'
+version '1.0-SNAPSHOT'
+def moduleName = 'kernel'
+def launcherClassName = 'common.AppCore'
+def java_home = System.getenv('JAVA_HOME')
+
+sourceCompatibility = 10
+targetCompatibility = 10
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    testCompile("org.junit.jupiter:junit-jupiter-api:5.2.0")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.2.0")
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    inputs.property("moduleName", moduleName)
+    manifest {
+        attributes(
+                'Main-Class': launcherClassName,
+                'Automatic-Module-Name': moduleName,
+        )
+    }
+}
+
+compileJava {
+    inputs.property("moduleName", moduleName)
+    doFirst {
+        options.compilerArgs = [
+                '--module-path', classpath.asPath,
+        ]
+        classpath = files()
+    }
+}
+
+
+task link(type: Exec) {
+    dependsOn 'clean'
+    dependsOn 'jar'
+
+    workingDir 'build'
+
+    commandLine "${java_home}/bin/jlink", '--module-path', "${java_home}/jmods:libs",
+            '--add-modules', moduleName, '--launcher', "ApplicationLauncher=${moduleName}/${launcherClassName}", '--output', './../../javaImageBuild', '--strip-debug',
+            '--compress', '2', '--no-header-files', '--no-man-pages'
+}
