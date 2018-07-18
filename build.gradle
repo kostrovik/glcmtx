@@ -1,11 +1,15 @@
 task cleanAll(type: GradleBuild) {
-    tasks = ['kernel:clean']
+    tasks = ['cleanJavaImage', 'kernel:clean']
 }
 
 task linkAll(type: GradleBuild) {
-    tasks = ['kernel:link']
+    tasks = ['cleanJavaImage', 'kernel:link']
 }
 
 task wrapper(type: Wrapper) {
     gradleVersion = '4.8.1'
+}
+
+task cleanJavaImage {
+    file('javaImageBuild').deleteDir()
 }
