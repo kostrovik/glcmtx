@@ -1,5 +1,6 @@
-package common;
+package kernel.common;
 
+import helper.common.ApplicationLogger;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.application.Preloader;
@@ -8,6 +9,8 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * project: glcmtx
@@ -16,7 +19,7 @@ import java.util.Map;
  * github:  https://github.com/kostrovik/glcmtx
  */
 public class AppCore extends Application {
-    //    private static Logger logger = LoggerFactory.getLogger(AppCore.class);
+    private static Logger logger = ApplicationLogger.getLogger(AppCore.class.getName());
     private static Preloader preloader;
     private static Stage mainStage;
 
@@ -44,7 +47,7 @@ public class AppCore extends Application {
                 Stage primaryStage = new Stage();
                 preloader.start(primaryStage);
             } catch (Exception error) {
-//                logger.error("Ошибка запуска preloader.", error);
+                logger.log(Level.SEVERE, "Ошибка запуска preloader.", error);
             }
         });
 
@@ -52,7 +55,7 @@ public class AppCore extends Application {
     }
 
     public void start(Stage mainWindow) {
-//        logger.info("Запуск приложения.");
+        logger.info("Запуск приложения.");
 
         mainStage = mainWindow;
         setStageSize(mainWindow);

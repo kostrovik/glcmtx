@@ -1,6 +1,6 @@
-package common;
+package kernel.common;
 
-import interfaces.EventListenerInterface;
+import kernel.interfaces.EventListenerInterface;
 import javafx.application.Platform;
 import javafx.application.Preloader;
 import javafx.geometry.Insets;

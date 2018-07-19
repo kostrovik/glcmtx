@@ -1,4 +1,4 @@
-package interfaces;
+package kernel.interfaces;
 
 import java.util.EventObject;
 

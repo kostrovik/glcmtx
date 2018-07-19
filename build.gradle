@@ -1,20 +1,60 @@
+/**
+ * В данном массиве необходимо объявить все модули которые должны быть залинкованы в общую сборку.
+ * Дальше из этого массива создаются команды для очисти и сборки модулей, а так же команда для сборки JRE.
+ */
+def modules = ['kernel', 'helper']
+
+// создание команд для очистки модулей
+def cleaners = []
+modules.each { name ->
+    cleaners << name + ':clean'
+}
+cleaners << 'cleanJavaImage'
+cleaners << 'cleanJavaModules'
+
+// задание для очистки модулей и директорий созданный в процессе линковки
 task cleanAll(type: GradleBuild) {
-    tasks = ['cleanJavaImage', 'kernel:clean']
+    tasks = cleaners
 }
 
+// создание команд для сборки модулей
+def builders = []
+builders << 'cleanJavaImage'
+builders << 'cleanJavaModules'
+modules.each { name ->
+    builders << name + ':build'
+}
+builders << 'link'
+builders << 'addLauncher'
+
+// задание для сборки, линковки и добавления запускающего exe файла для windows
 task linkAll(type: GradleBuild) {
-    tasks = ['cleanJavaImage', 'kernel:link', 'addLauncher']
+    tasks = builders
 }
 
 task wrapper(type: Wrapper) {
     gradleVersion = '4.8.1'
 }
 
+// очистка собранного образа JRE и модулей приложения
 task cleanJavaImage {
     file('javaImageBuild').deleteDir()
 }
 
+// очистка директории с скомпилированными модулями
+task cleanJavaModules {
+    file('modules').deleteDir()
+}
+
+// копирование exe в директорию образа
 task addLauncher(type: Copy) {
     from file("launcher/matrix_launcher.exe")
     into file("javaImageBuild")
+}
+
+// задание запускающее консольную команду jlink для линковки JRE и java модулей вместе с модулями приложения
+def java_home = System.getenv('JAVA_HOME')
+task link(type: Exec) {
+    commandLine "${java_home}/bin/jlink", '--module-path', "${java_home}/jmods:modules",
+            '--add-modules', modules.join(","), '--launcher', "ApplicationLauncher=kernel/kernel.common.AppCore", '--output', 'javaImageBuild'
 }

@@ -7,6 +7,8 @@
 module kernel {
     requires javafx.graphics;
     requires javafx.controls;
+    requires java.logging;
+    requires helper;
 
-    exports common;
+    exports kernel.common;
 }
