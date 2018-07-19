@@ -3,7 +3,7 @@ task cleanAll(type: GradleBuild) {
 }
 
 task linkAll(type: GradleBuild) {
-    tasks = ['cleanJavaImage', 'kernel:link']
+    tasks = ['cleanJavaImage', 'kernel:link', 'addLauncher']
 }
 
 task wrapper(type: Wrapper) {
@@ -12,4 +12,9 @@ task wrapper(type: Wrapper) {
 
 task cleanJavaImage {
     file('javaImageBuild').deleteDir()
+}
+
+task addLauncher(type: Copy) {
+    from file("launcher/matrix_launcher.exe")
+    into file("javaImageBuild")
 }

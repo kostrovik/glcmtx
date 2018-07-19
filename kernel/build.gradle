@@ -10,6 +10,8 @@ def java_home = System.getenv('JAVA_HOME')
 
 sourceCompatibility = 10
 targetCompatibility = 10
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
 
 repositories {
     jcenter()
