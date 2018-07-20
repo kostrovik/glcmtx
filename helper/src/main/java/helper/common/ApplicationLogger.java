@@ -3,6 +3,8 @@ package helper.common;
 import helper.formatter.LogMessageFormatter;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -27,25 +29,42 @@ public class ApplicationLogger extends Logger {
 
     public static Logger getLogger(String name) {
         Logger logger = Logger.getLogger(name);
-        try {
-            Path logPath = Paths.get(System.getProperty("java.home") + "/logs", String.format("%s.log", LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
-            String filepath = logPath.toString();
 
-            if (Files.notExists(logPath.getParent())) {
-                Files.createDirectory(logPath.getParent());
-            }
+        createLoggerFile();
 
-            fileHandler = new FileHandler(filepath, true);
-            fileHandler.setLevel(Level.ALL);
-            fileHandler.setFormatter(new LogMessageFormatter());
-
-            logger.setUseParentHandlers(false);
-            logger.setLevel(Level.ALL);
-            logger.addHandler(fileHandler);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        logger.setUseParentHandlers(false);
+        logger.setLevel(Level.ALL);
+        logger.addHandler(fileHandler);
 
         return logger;
+    }
+
+    private static void createLoggerFile() {
+        if (fileHandler == null) {
+            synchronized (ApplicationLogger.class) {
+                if (fileHandler == null) {
+                    try {
+                        URI applicationDirectory = ApplicationLogger.class.getProtectionDomain().getCodeSource().getLocation().toURI();
+
+
+                        if (Paths.get(applicationDirectory).getParent().toString().equals("/")) {
+                            applicationDirectory = URI.create(System.getProperty("java.home"));
+                        }
+
+                        Path logPath = Paths.get(applicationDirectory.getPath() + "/logs", String.format("%s.log", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+
+                        if (Files.notExists(logPath.getParent())) {
+                            Files.createDirectory(logPath.getParent());
+                        }
+
+                        fileHandler = new FileHandler(logPath.toString(), true);
+                        fileHandler.setLevel(Level.ALL);
+                        fileHandler.setFormatter(new LogMessageFormatter());
+                    } catch (IOException | URISyntaxException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
     }
 }

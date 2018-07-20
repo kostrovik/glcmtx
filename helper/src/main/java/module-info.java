@@ -6,7 +6,6 @@
  */
 module helper {
     requires java.logging;
-    requires java.base;
 
     exports helper.common;
 }
