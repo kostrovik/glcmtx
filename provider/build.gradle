@@ -4,8 +4,7 @@ plugins {
 
 group 'com.github.kostrovik'
 version '1.0-SNAPSHOT'
-def moduleName = 'kernel'
-def launcherClassName = 'kernel.common.AppCore'
+def moduleName = 'provider'
 
 sourceCompatibility = 10
 targetCompatibility = 10
@@ -18,13 +17,6 @@ repositories {
 }
 
 dependencies {
-    testCompile("org.junit.jupiter:junit-jupiter-api:5.2.0")
-    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.2.0")
-
-    compile project(':helper')
-    compile project(':graphics')
-    compile project(':provider')
-    compile project(':users')
 }
 
 test {
@@ -35,7 +27,6 @@ jar {
     inputs.property("moduleName", moduleName)
     manifest {
         attributes(
-                'Main-Class': launcherClassName,
                 'Automatic-Module-Name': moduleName,
         )
     }

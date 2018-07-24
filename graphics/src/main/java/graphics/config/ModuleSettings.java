@@ -1,4 +1,4 @@
-package config;
+package graphics.config;
 
 import helper.common.ApplicationLogger;
 

@@ -1,6 +1,6 @@
-package common.icons;
+package graphics.common.icons;
 
-import config.ModuleSettings;
+import graphics.config.ModuleSettings;
 import javafx.scene.text.Font;
 
 /**

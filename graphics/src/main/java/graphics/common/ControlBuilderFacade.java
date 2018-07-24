@@ -1,7 +1,8 @@
-package common;
+package graphics.common;
 
-import builders.ButtonBuilder;
-import common.icons.SolidIcons;
+import graphics.builders.ButtonBuilder;
+import graphics.common.icons.SolidIcons;
+import graphics.controls.notification.Notification;
 import javafx.scene.control.Button;
 
 /**
@@ -15,8 +16,13 @@ public class ControlBuilderFacade {
         ButtonBuilder builder = new ButtonBuilder();
         return builder.createButton(buttonTitle);
     }
+
     public Button createButton(String buttonTitle, SolidIcons icon) {
         ButtonBuilder builder = new ButtonBuilder();
-        return builder.createButton(icon,buttonTitle);
+        return builder.createButton(icon, buttonTitle);
+    }
+
+    public Notification createFormNotification() {
+        return new Notification();
     }
 }

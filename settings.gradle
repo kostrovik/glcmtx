@@ -2,4 +2,6 @@ rootProject.name = 'glcmtx'
 include 'kernel'
 include 'helper'
 include 'graphics'
+include 'users'
+include 'provider'
 

@@ -1,6 +1,8 @@
 package kernel.common;
 
-import common.ControlBuilderFacade;
+import graphics.common.ControlBuilderFacade;
+import graphics.controls.notification.Notification;
+import graphics.controls.notification.NotificationType;
 import helper.common.ApplicationLogger;
 import javafx.application.Platform;
 import javafx.application.Preloader;
@@ -8,9 +10,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -36,12 +38,10 @@ public class ApplicationPreloader extends Preloader {
 
     private Stage stage;
     private EventListenerInterface consumer;
-    private String login;
-    private String password;
     private TextField userLogin;
     private PasswordField userPassword;
     private Button enterButton;
-    private Label notifications;
+    private Notification formNotification;
 
     public ApplicationPreloader(EventListenerInterface consumer) {
         this.consumer = consumer;
@@ -59,17 +59,15 @@ public class ApplicationPreloader extends Preloader {
         userLogin = new TextField();
         userLogin.setPromptText("login");
         loginForm.getChildren().add(userLogin);
-        userLogin.addEventFilter(KeyEvent.KEY_RELEASED, event -> notifications.setText(null));
+        userLogin.addEventFilter(KeyEvent.KEY_RELEASED, event -> formNotification.setIsVisible(false));
 
         userPassword = new PasswordField();
         userPassword.setPromptText("password");
         loginForm.getChildren().add(userPassword);
-        userPassword.addEventFilter(KeyEvent.KEY_RELEASED, event -> notifications.setText(null));
+        userPassword.addEventFilter(KeyEvent.KEY_RELEASED, event -> formNotification.setIsVisible(false));
 
         enterButton = facade.createButton("Войти");
         enterButton.setOnAction(t -> {
-            login = userLogin.getText();
-            password = userPassword.getText();
             disableForm(true);
             checkForm();
         });
@@ -83,19 +81,26 @@ public class ApplicationPreloader extends Preloader {
 
         loginForm.getChildren().add(buttons);
 
-        notifications = new Label(null);
-        loginForm.getChildren().add(notifications);
+        formNotification = facade.createFormNotification();
 
-        pane.setId("preloader");
+        loginForm.getChildren().add(formNotification);
+
+        loginForm.addEventHandler(KeyEvent.KEY_RELEASED, ev -> {
+            if (ev.getCode() == KeyCode.ENTER) {
+                enterButton.fire();
+                ev.consume();
+            }
+        });
+
         pane.getChildren().addAll(loginForm);
         AnchorPane.setRightAnchor(loginForm, 20.0);
         AnchorPane.setTopAnchor(loginForm, 20.0);
 
         Scene preloader = new Scene(pane, 600, 400);
 
-
         try {
             preloader.getStylesheets().add(Class.forName(this.getClass().getName()).getResource("/styles/preloader.css").toExternalForm());
+            preloader.getStylesheets().add(Class.forName(this.getClass().getName()).getResource("/styles/themes/admin-theme.css").toExternalForm());
         } catch (ClassNotFoundException error) {
             logger.log(Level.WARNING, "Ошибка загрузки изображения для preloader.", error);
         }
@@ -126,21 +131,22 @@ public class ApplicationPreloader extends Preloader {
     }
 
     private void checkForm() {
-        if (login.trim().isEmpty()) {
-            notifications.setText("Необходимо заполнить логин.");
-        }
-
-        if (stage.isShowing() && consumer != null) {
+        if (userLogin.getText().trim().isEmpty()) {
+            String location = String.format("class: %s, method: %s", this.getClass().getName(), "checkForm()");
+            handleErrorNotification(new Preloader.ErrorNotification(location, "Необходимо заполнить логин.", new Exception()));
+        } else if (consumer != null) {
             Map<String, String> userAuthForm = new HashMap<>();
-            userAuthForm.put("login", login);
-            userAuthForm.put("password", password);
+            userAuthForm.put("login", userLogin.getText());
+            userAuthForm.put("password", userPassword.getText());
             consumer.handle(new EventObject(userAuthForm));
         }
     }
 
     @Override
     public boolean handleErrorNotification(Preloader.ErrorNotification errorNotification) {
-        notifications.setText(errorNotification.getDetails());
+        formNotification.setMessage(errorNotification.getDetails());
+        formNotification.setType(NotificationType.ERROR);
+
         disableForm(false);
         return true;
     }

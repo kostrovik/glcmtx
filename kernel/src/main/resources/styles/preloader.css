@@ -1,4 +1,4 @@
-#preloader{
+.root{
     -fx-background-image: url("preloader.jpg");
     -fx-background-repeat: stretch;
     -fx-background-size: 852 480;

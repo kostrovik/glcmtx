@@ -1,6 +1,6 @@
-package builders;
+package graphics.builders;
 
-import common.icons.SolidIcons;
+import graphics.common.icons.SolidIcons;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 

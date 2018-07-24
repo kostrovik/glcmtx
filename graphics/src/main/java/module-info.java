@@ -10,6 +10,7 @@ module graphics {
     requires java.logging;
     requires helper;
 
-    exports common;
-    exports common.icons;
+    exports graphics.common;
+    exports graphics.common.icons;
+    exports graphics.controls.notification;
 }

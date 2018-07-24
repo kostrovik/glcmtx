@@ -21,10 +21,10 @@ import java.util.logging.Logger;
  * github:  https://github.com/kostrovik/glcmtx
  */
 public class ApplicationLogger extends Logger {
-    private static FileHandler fileHandler;
+    private static volatile FileHandler fileHandler;
 
-    private ApplicationLogger() {
-        super(null, null);
+    private ApplicationLogger(String name, String resourceBundleName) {
+        super(name, resourceBundleName);
     }
 
     public static Logger getLogger(String name) {
@@ -45,7 +45,6 @@ public class ApplicationLogger extends Logger {
                 if (fileHandler == null) {
                     try {
                         URI applicationDirectory = ApplicationLogger.class.getProtectionDomain().getCodeSource().getLocation().toURI();
-
 
                         if (Paths.get(applicationDirectory).getParent().toString().equals("/")) {
                             applicationDirectory = URI.create(System.getProperty("java.home"));

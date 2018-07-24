@@ -8,8 +8,15 @@ module kernel {
     requires javafx.graphics;
     requires javafx.controls;
     requires java.logging;
+
     requires helper;
     requires graphics;
+    requires provider;
+    requires users;
 
     exports kernel.common;
+    exports kernel.interfaces;
+
+    uses provider.interfaces.ModuleConfiguratorInterface;
+    provides provider.interfaces.ModuleConfiguratorInterface with kernel.common.Configurator;
 }

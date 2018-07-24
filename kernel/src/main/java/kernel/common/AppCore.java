@@ -7,7 +7,9 @@ import javafx.application.Preloader;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import kernel.builders.SceneFactory;
 
+import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,7 +34,8 @@ public class AppCore extends Application {
             Object source = event.getSource();
             if (source instanceof Map) {
                 if (!((Map) source).get("login").equals("test")) {
-                    preloader.handleErrorNotification(new Preloader.ErrorNotification(String.format("class: %s, method: %s", AppCore.class.getName(), "main()"), "Не верные данные пользователя.", new Exception()));
+                    String location = String.format("class: %s, method: %s", AppCore.class.getName(), "main()");
+                    preloader.handleErrorNotification(new Preloader.ErrorNotification(location, "Не верные данные пользователя.", new Exception()));
                 } else {
                     preloader.handleStateChangeNotification(new Preloader.StateChangeNotification(Preloader.StateChangeNotification.Type.BEFORE_START));
                     initScene();
@@ -58,6 +61,12 @@ public class AppCore extends Application {
         logger.info("Запуск приложения.");
 
         mainStage = mainWindow;
+        instantiateSceneFactory();
+
+        SceneFactory factory = SceneFactory.getInstance();
+        factory.initScene("kernel", "main", null);
+        mainWindow.setTitle("Glance Matrix");
+
         setStageSize(mainWindow);
 
         // Завершение приложения при закрытии окна.
@@ -76,5 +85,19 @@ public class AppCore extends Application {
         stage.setY(primaryScreenBounds.getMinY());
         stage.setWidth(primaryScreenBounds.getWidth());
         stage.setHeight(primaryScreenBounds.getHeight());
+    }
+
+    private static void instantiateSceneFactory() {
+        SceneFactory factory = SceneFactory.getInstance();
+        Class<? extends SceneFactory> factoryClass = factory.getClass();
+
+        try {
+            Field factoryStage = factoryClass.getDeclaredField("mainWindow");
+            factoryStage.setAccessible(true);
+            factoryStage.set(factory, mainStage);
+            factoryStage.setAccessible(false);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 }
