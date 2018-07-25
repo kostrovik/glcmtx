@@ -1,7 +1,7 @@
 package ru.glance.matrix.graphics.builders;
 
 import ru.glance.matrix.graphics.helper.PropertyReference;
-import helper.common.ApplicationLogger;
+import ru.glance.matrix.helper.common.ApplicationLogger;
 import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;

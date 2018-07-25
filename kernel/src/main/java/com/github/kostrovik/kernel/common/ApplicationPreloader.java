@@ -3,7 +3,7 @@ package com.github.kostrovik.kernel.common;
 import ru.glance.matrix.graphics.common.ControlBuilderFacade;
 import ru.glance.matrix.graphics.controls.notification.Notification;
 import ru.glance.matrix.graphics.controls.notification.NotificationType;
-import helper.common.ApplicationLogger;
+import ru.glance.matrix.helper.common.ApplicationLogger;
 import javafx.application.Platform;
 import javafx.application.Preloader;
 import javafx.geometry.Insets;

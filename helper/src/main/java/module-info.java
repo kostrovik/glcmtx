@@ -7,5 +7,5 @@
 module helper {
     requires java.logging;
 
-    exports helper.common;
+    exports ru.glance.matrix.helper.common;
 }

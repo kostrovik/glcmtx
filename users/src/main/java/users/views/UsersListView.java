@@ -1,7 +1,7 @@
 package users.views;
 
 import ru.glance.matrix.graphics.common.ControlBuilderFacade;
-import helper.common.ApplicationLogger;
+import ru.glance.matrix.helper.common.ApplicationLogger;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

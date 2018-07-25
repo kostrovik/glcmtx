@@ -1,6 +1,6 @@
 package com.github.kostrovik.kernel.common;
 
-import helper.common.ApplicationLogger;
+import ru.glance.matrix.helper.common.ApplicationLogger;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.application.Preloader;

@@ -1,6 +1,6 @@
 package ru.glance.matrix.graphics.helper;
 
-import helper.common.ApplicationLogger;
+import ru.glance.matrix.helper.common.ApplicationLogger;
 import javafx.beans.property.ReadOnlyProperty;
 
 import java.lang.reflect.InvocationTargetException;

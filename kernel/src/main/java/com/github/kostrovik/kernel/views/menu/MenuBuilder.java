@@ -1,7 +1,7 @@
 package com.github.kostrovik.kernel.views.menu;
 
-import helper.common.ApplicationLogger;
-import helper.common.ConfigParser;
+import ru.glance.matrix.helper.common.ApplicationLogger;
+import ru.glance.matrix.helper.common.ConfigParser;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;

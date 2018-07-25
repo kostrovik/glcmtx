@@ -1,6 +1,6 @@
 package com.github.kostrovik.kernel.builders;
 
-import helper.common.ApplicationLogger;
+import ru.glance.matrix.helper.common.ApplicationLogger;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
