@@ -1,6 +1,6 @@
-package graphics.builders;
+package ru.glance.matrix.graphics.builders;
 
-import graphics.helper.PropertyReference;
+import ru.glance.matrix.graphics.helper.PropertyReference;
 import helper.common.ApplicationLogger;
 import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.beans.property.ReadOnlyObjectWrapper;

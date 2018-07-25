@@ -1,4 +1,4 @@
-package graphics.controls.field;
+package ru.glance.matrix.graphics.controls.field;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;

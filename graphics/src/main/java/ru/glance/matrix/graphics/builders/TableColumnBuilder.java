@@ -1,4 +1,4 @@
-package graphics.builders;
+package ru.glance.matrix.graphics.builders;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.TableCell;

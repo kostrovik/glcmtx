@@ -10,8 +10,8 @@ module graphics {
     requires java.logging;
     requires helper;
 
-    exports graphics.common;
-    exports graphics.common.icons;
-    exports graphics.controls.notification;
-    exports graphics.controls.field;
+    exports ru.glance.matrix.graphics.common;
+    exports ru.glance.matrix.graphics.common.icons;
+    exports ru.glance.matrix.graphics.controls.notification;
+    exports ru.glance.matrix.graphics.controls.field;
 }

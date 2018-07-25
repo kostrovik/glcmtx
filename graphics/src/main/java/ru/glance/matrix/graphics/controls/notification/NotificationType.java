@@ -1,4 +1,4 @@
-package graphics.controls.notification;
+package ru.glance.matrix.graphics.controls.notification;
 
 /**
  * project: glcmtx

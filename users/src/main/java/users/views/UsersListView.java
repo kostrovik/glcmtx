@@ -1,6 +1,6 @@
 package users.views;
 
-import graphics.common.ControlBuilderFacade;
+import ru.glance.matrix.graphics.common.ControlBuilderFacade;
 import helper.common.ApplicationLogger;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;

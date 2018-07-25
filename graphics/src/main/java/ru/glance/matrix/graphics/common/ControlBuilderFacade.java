@@ -1,10 +1,10 @@
-package graphics.common;
+package ru.glance.matrix.graphics.common;
 
-import graphics.builders.ButtonBuilder;
-import graphics.builders.TableColumnBuilder;
-import graphics.common.icons.SolidIcons;
-import graphics.controls.field.LabeledTextField;
-import graphics.controls.notification.Notification;
+import ru.glance.matrix.graphics.builders.ButtonBuilder;
+import ru.glance.matrix.graphics.builders.TableColumnBuilder;
+import ru.glance.matrix.graphics.common.icons.SolidIcons;
+import ru.glance.matrix.graphics.controls.field.LabeledTextField;
+import ru.glance.matrix.graphics.controls.notification.Notification;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 

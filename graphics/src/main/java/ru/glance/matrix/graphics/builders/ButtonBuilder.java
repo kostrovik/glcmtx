@@ -1,6 +1,6 @@
-package graphics.builders;
+package ru.glance.matrix.graphics.builders;
 
-import graphics.common.icons.SolidIcons;
+import ru.glance.matrix.graphics.common.icons.SolidIcons;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 

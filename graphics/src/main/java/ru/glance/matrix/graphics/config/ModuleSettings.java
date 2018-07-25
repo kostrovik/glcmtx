@@ -1,4 +1,4 @@
-package graphics.config;
+package ru.glance.matrix.graphics.config;
 
 import helper.common.ApplicationLogger;
 

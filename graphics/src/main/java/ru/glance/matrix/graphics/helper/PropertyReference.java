@@ -1,4 +1,4 @@
-package graphics.helper;
+package ru.glance.matrix.graphics.helper;
 
 import helper.common.ApplicationLogger;
 import javafx.beans.property.ReadOnlyProperty;

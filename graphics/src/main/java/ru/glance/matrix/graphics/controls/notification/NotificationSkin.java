@@ -1,4 +1,4 @@
-package graphics.controls.notification;
+package ru.glance.matrix.graphics.controls.notification;
 
 import javafx.geometry.Pos;
 import javafx.scene.Group;

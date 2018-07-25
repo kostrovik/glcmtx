@@ -1,4 +1,4 @@
-package graphics.controls.field;
+package ru.glance.matrix.graphics.controls.field;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;

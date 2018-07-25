@@ -1,6 +1,6 @@
-package graphics.common.icons;
+package ru.glance.matrix.graphics.common.icons;
 
-import graphics.config.ModuleSettings;
+import ru.glance.matrix.graphics.config.ModuleSettings;
 import javafx.scene.text.Font;
 
 /**

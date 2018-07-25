@@ -1,8 +1,8 @@
 package com.github.kostrovik.kernel.common;
 
-import graphics.common.ControlBuilderFacade;
-import graphics.controls.notification.Notification;
-import graphics.controls.notification.NotificationType;
+import ru.glance.matrix.graphics.common.ControlBuilderFacade;
+import ru.glance.matrix.graphics.controls.notification.Notification;
+import ru.glance.matrix.graphics.controls.notification.NotificationType;
 import helper.common.ApplicationLogger;
 import javafx.application.Platform;
 import javafx.application.Preloader;

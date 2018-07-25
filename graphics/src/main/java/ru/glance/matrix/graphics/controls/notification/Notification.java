@@ -1,4 +1,4 @@
-package graphics.controls.notification;
+package ru.glance.matrix.graphics.controls.notification;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
