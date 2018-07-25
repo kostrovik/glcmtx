@@ -14,8 +14,8 @@ module kernel {
     requires provider;
     requires users;
 
-    exports kernel.common;
+    exports com.github.kostrovik.kernel.common;
 
     uses provider.interfaces.ModuleConfiguratorInterface;
-    provides provider.interfaces.ModuleConfiguratorInterface with kernel.common.Configurator;
+    provides provider.interfaces.ModuleConfiguratorInterface with com.github.kostrovik.kernel.common.Configurator;
 }

@@ -1,4 +1,4 @@
-package kernel.common;
+package com.github.kostrovik.kernel.common;
 
 import graphics.common.ControlBuilderFacade;
 import graphics.controls.notification.Notification;
@@ -19,7 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import kernel.interfaces.EventListenerInterface;
+import com.github.kostrovik.kernel.interfaces.EventListenerInterface;
 
 import java.util.EventObject;
 import java.util.HashMap;

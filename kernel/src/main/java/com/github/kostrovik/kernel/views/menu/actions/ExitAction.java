@@ -1,4 +1,4 @@
-package views.menu.actions;
+package com.github.kostrovik.kernel.views.menu.actions;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

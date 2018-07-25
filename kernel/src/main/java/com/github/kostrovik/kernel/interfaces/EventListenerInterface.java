@@ -1,4 +1,4 @@
-package kernel.interfaces;
+package com.github.kostrovik.kernel.interfaces;
 
 import java.util.EventObject;
 

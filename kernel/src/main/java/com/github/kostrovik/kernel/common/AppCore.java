@@ -1,4 +1,4 @@
-package kernel.common;
+package com.github.kostrovik.kernel.common;
 
 import helper.common.ApplicationLogger;
 import javafx.application.Application;
@@ -7,7 +7,7 @@ import javafx.application.Preloader;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import kernel.builders.SceneFactory;
+import com.github.kostrovik.kernel.builders.SceneFactory;
 
 import java.lang.reflect.Field;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package kernel.builders;
+package com.github.kostrovik.kernel.builders;
 
 import helper.common.ApplicationLogger;
 import javafx.geometry.Insets;

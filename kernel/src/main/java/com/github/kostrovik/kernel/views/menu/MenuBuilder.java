@@ -1,4 +1,4 @@
-package views.menu;
+package com.github.kostrovik.kernel.views.menu;
 
 import helper.common.ApplicationLogger;
 import helper.common.ConfigParser;

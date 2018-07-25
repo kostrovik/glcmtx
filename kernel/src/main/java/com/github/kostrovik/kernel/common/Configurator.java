@@ -1,11 +1,11 @@
-package kernel.common;
+package com.github.kostrovik.kernel.common;
 
 import javafx.scene.layout.Pane;
 import provider.interfaces.ContentViewInterface;
 import provider.interfaces.EventListenerInterface;
 import provider.interfaces.MenuBuilderInterface;
 import provider.interfaces.ModuleConfiguratorInterface;
-import views.menu.MenuBuilder;
+import com.github.kostrovik.kernel.views.menu.MenuBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
