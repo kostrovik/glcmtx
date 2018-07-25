@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import provider.interfaces.*;
+import ru.glance.matrix.provider.interfaces.*;
 
 import java.util.EventObject;
 import java.util.List;

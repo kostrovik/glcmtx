@@ -13,7 +13,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import provider.interfaces.ContentViewInterface;
+import ru.glance.matrix.provider.interfaces.ContentViewInterface;
 import users.models.User;
 import users.models.UserRole;
 

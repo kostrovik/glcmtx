@@ -2,7 +2,7 @@ package com.github.kostrovik.kernel.views.menu.actions;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import provider.interfaces.EventListenerInterface;
+import ru.glance.matrix.provider.interfaces.EventListenerInterface;
 
 /**
  * project: glcmtx

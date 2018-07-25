@@ -16,6 +16,6 @@ module kernel {
 
     exports com.github.kostrovik.kernel.common;
 
-    uses provider.interfaces.ModuleConfiguratorInterface;
-    provides provider.interfaces.ModuleConfiguratorInterface with com.github.kostrovik.kernel.common.Configurator;
+    uses ru.glance.matrix.provider.interfaces.ModuleConfiguratorInterface;
+    provides ru.glance.matrix.provider.interfaces.ModuleConfiguratorInterface with com.github.kostrovik.kernel.common.Configurator;
 }

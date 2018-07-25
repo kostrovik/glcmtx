@@ -5,8 +5,8 @@ import ru.glance.matrix.helper.common.ConfigParser;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
-import provider.interfaces.EventListenerInterface;
-import provider.interfaces.MenuBuilderInterface;
+import ru.glance.matrix.provider.interfaces.EventListenerInterface;
+import ru.glance.matrix.provider.interfaces.MenuBuilderInterface;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

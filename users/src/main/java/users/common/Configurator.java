@@ -1,10 +1,10 @@
 package users.common;
 
 import javafx.scene.layout.Pane;
-import provider.interfaces.ContentViewInterface;
-import provider.interfaces.EventListenerInterface;
-import provider.interfaces.MenuBuilderInterface;
-import provider.interfaces.ModuleConfiguratorInterface;
+import ru.glance.matrix.provider.interfaces.ContentViewInterface;
+import ru.glance.matrix.provider.interfaces.EventListenerInterface;
+import ru.glance.matrix.provider.interfaces.MenuBuilderInterface;
+import ru.glance.matrix.provider.interfaces.ModuleConfiguratorInterface;
 import users.dictionaries.ViewTypeDictionary;
 import users.views.UsersListView;
 import users.views.menu.MenuBuilder;

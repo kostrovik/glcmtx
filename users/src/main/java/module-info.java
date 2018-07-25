@@ -19,5 +19,5 @@ module users {
 
     opens users.models;
 
-    provides provider.interfaces.ModuleConfiguratorInterface with users.common.Configurator;
+    provides ru.glance.matrix.provider.interfaces.ModuleConfiguratorInterface with users.common.Configurator;
 }

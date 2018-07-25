@@ -1,4 +1,4 @@
-package provider.interfaces;
+package ru.glance.matrix.provider.interfaces;
 
 import javafx.scene.layout.Region;
 
