@@ -13,4 +13,5 @@ module graphics {
     exports graphics.common;
     exports graphics.common.icons;
     exports graphics.controls.notification;
+    exports graphics.controls.field;
 }

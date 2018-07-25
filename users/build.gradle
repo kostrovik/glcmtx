@@ -22,6 +22,7 @@ dependencies {
 
     compile project(':helper')
     compile project(':provider')
+    compile project(':graphics')
 }
 
 test {

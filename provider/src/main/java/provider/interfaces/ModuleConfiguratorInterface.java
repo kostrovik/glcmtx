@@ -1,5 +1,9 @@
 package provider.interfaces;
 
+import javafx.scene.layout.Pane;
+
+import java.util.Map;
+
 /**
  * project: glcmtx
  * author:  kostrovik
@@ -7,5 +11,7 @@ package provider.interfaces;
  * github:  https://github.com/kostrovik/glcmtx
  */
 public interface ModuleConfiguratorInterface {
-    MenuBuilderInterface getMenuBuilder();
+    MenuBuilderInterface getMenuBuilder(EventListenerInterface listener);
+
+    Map<String, ContentViewInterface> getViewEvents(Pane content);
 }

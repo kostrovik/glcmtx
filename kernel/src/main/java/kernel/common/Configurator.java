@@ -1,8 +1,14 @@
 package kernel.common;
 
+import javafx.scene.layout.Pane;
+import provider.interfaces.ContentViewInterface;
+import provider.interfaces.EventListenerInterface;
 import provider.interfaces.MenuBuilderInterface;
 import provider.interfaces.ModuleConfiguratorInterface;
 import views.menu.MenuBuilder;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * project: glcmtx
@@ -12,7 +18,12 @@ import views.menu.MenuBuilder;
  */
 public class Configurator implements ModuleConfiguratorInterface {
     @Override
-    public MenuBuilderInterface getMenuBuilder() {
-        return new MenuBuilder();
+    public MenuBuilderInterface getMenuBuilder(EventListenerInterface listener) {
+        return new MenuBuilder(listener);
+    }
+
+    @Override
+    public Map<String, ContentViewInterface> getViewEvents(Pane content) {
+        return new HashMap<>();
     }
 }

@@ -15,7 +15,6 @@ module kernel {
     requires users;
 
     exports kernel.common;
-    exports kernel.interfaces;
 
     uses provider.interfaces.ModuleConfiguratorInterface;
     provides provider.interfaces.ModuleConfiguratorInterface with kernel.common.Configurator;

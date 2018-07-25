@@ -5,20 +5,23 @@
 
 .menu-bar{
     -fx-background-color: derive(#404040, -20%);
+
+    -styleMenuTextColor-color: #ffffff;
 }
 
 .menu-bar .label {
-    -fx-text-fill: derive(#ffffff, -20%);
+    -fx-text-fill: derive(-styleMenuTextColor-color, -20%);
 }
 
 .menu-bar > .container > .menu-button:hover,
 .menu-bar > .container > .menu-button:focused,
 .menu-bar > .container > .menu-button:showing {
     -fx-background-color: #326eb2;
+    -fx-text-fill: -styleMenuTextColor-color;
 }
 
 .menu-item .label {
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: derive(-styleMenuTextColor-color, -20%);
 }
 
 .menu-item:focused {
@@ -27,7 +30,7 @@
 }
 
 .menu-item:focused .label {
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: -styleMenuTextColor-color;
 }
 
 .context-menu {
@@ -54,14 +57,76 @@
 .button{
     -fx-padding: 5px 10px;
     -fx-border-radius: 6px;
-    -fx-background-color: #326eb2;
+    -fx-background-color: -styleButtonBackground-color;
     -fx-text-fill: #ffffff;
+    -styleButtonBackground-color: #326eb2;
 }
 
 .button:hover{
-    -fx-background-color: derive(#326eb2, -20%);
+    -fx-background-color: derive(-styleButtonBackground-color, -20%);
 }
 
 .button:cancel{
     -fx-background-color: #74777b;
+}
+
+.table-view {
+    -styleTableBackground-color: #505050;
+    -styleTableSelectedRow-color: #326eb2;
+    -styleTableText-color: #ffffff;
+    -fx-background-color: -styleTableBackground-color;
+}
+
+.table-view .column-header, .table-view .column-header .label {
+    -fx-background-color: #2B2B2B;
+    -fx-color-label-visible: -styleTableText-color;
+    -fx-text-fill: -styleTableText-color;
+}
+
+.table-view .indexed-cell {
+    -fx-text-fill: -styleTableText-color;
+}
+
+.table-view .table-row-cell:odd {
+    -fx-background-color: -styleTableBackground-color;
+}
+
+.table-view .table-row-cell:even {
+    -fx-background-color: derive(-styleTableBackground-color, -20%);
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background: -styleTableSelectedRow-color;
+    -fx-background-color: -styleTableSelectedRow-color;
+    -fx-table-cell-border-color: derive(-styleTableSelectedRow-color, -50%);
+}
+
+.table-view .table-row-cell:empty {
+    -fx-background-color: #323232;
+}
+
+.table-view .table-row-cell:empty:odd, .table-view .table-row-cell:empty:even {
+    -fx-background-color: #323232;
+}
+
+.table-view .table-row-cell .text {
+    -fx-fill: -styleTableText-color;
+}
+
+.text-field{
+    -styleTextFieldBackground-color: #808080;
+    -styleTextFieldBorder-color: #2B2B2B;
+    -styleTextFieldText-color: #ffffff;
+    -styleTextFieldFocused-color: #326eb2;
+
+    -fx-background-color: -styleTextFieldBackground-color;
+    -fx-border-color: -styleTextFieldBorder-color;
+    -fx-border-width: 1;
+    -fx-text-fill: -styleTextFieldText-color;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+}
+
+.text-field:focused {
+    -fx-effect: dropshadow(gaussian, -styleTextFieldFocused-color, 1, 2, 0, 0);
 }

@@ -10,10 +10,14 @@ module users {
 
     requires helper;
     requires provider;
+    requires graphics;
 
     exports users.common;
+    exports users.views;
     exports users.views.menu;
     exports users.views.menu.actions;
+
+    opens users.models;
 
     provides provider.interfaces.ModuleConfiguratorInterface with users.common.Configurator;
 }

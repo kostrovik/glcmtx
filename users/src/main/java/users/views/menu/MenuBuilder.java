@@ -5,6 +5,7 @@ import helper.common.ConfigParser;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
+import provider.interfaces.EventListenerInterface;
 import provider.interfaces.MenuBuilderInterface;
 
 import java.io.FileNotFoundException;
@@ -31,9 +32,11 @@ public class MenuBuilder implements MenuBuilderInterface {
     private static Logger logger = ApplicationLogger.getLogger(MenuBuilder.class.getName());
     private final static String defaultConfigFilePath = "/users/configurations/menu_config.properties";
     private ConfigParser parser;
+    private EventListenerInterface listener;
 
-    public MenuBuilder() {
+    public MenuBuilder(EventListenerInterface listener) {
         this.parser = new ConfigParser(loadConfig());
+        this.listener = listener;
     }
 
     @Override
@@ -63,8 +66,8 @@ public class MenuBuilder implements MenuBuilderInterface {
         Class<?> actionClass;
         try {
             actionClass = Class.forName(actionClassName);
-            Constructor<?> constructor = actionClass.getDeclaredConstructor();
-            action = (EventHandler<ActionEvent>) constructor.newInstance();
+            Constructor<?> constructor = actionClass.getDeclaredConstructor(EventListenerInterface.class);
+            action = (EventHandler<ActionEvent>) constructor.newInstance(listener);
         } catch (ClassNotFoundException e) {
             logger.log(Level.SEVERE, String.format("Для пункта меню не найден класс action %s.", actionClassName), e);
         } catch (NoSuchMethodException e) {

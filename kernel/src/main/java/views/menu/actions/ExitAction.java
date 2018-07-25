@@ -2,6 +2,7 @@ package views.menu.actions;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import provider.interfaces.EventListenerInterface;
 
 /**
  * project: glcmtx
@@ -10,6 +11,12 @@ import javafx.event.EventHandler;
  * github:  https://github.com/kostrovik/glcmtx
  */
 public class ExitAction implements EventHandler<ActionEvent> {
+    private EventListenerInterface listener;
+
+    public ExitAction(EventListenerInterface listener) {
+        this.listener = listener;
+    }
+
     @Override
     public void handle(ActionEvent event) {
         System.exit(0);

@@ -10,8 +10,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import provider.interfaces.ContentViewInterface;
-import provider.interfaces.MenuBuilderInterface;
+import provider.interfaces.*;
 
 import java.util.EventObject;
 import java.util.List;
@@ -26,7 +25,7 @@ import java.util.logging.Logger;
  * date:    21/07/2018
  * github:  https://github.com/kostrovik/glcmtx
  */
-final public class SceneFactory {
+final public class SceneFactory implements EventListenerInterface {
     private static Logger logger = ApplicationLogger.getLogger(SceneFactory.class.getName());
 
     /**
@@ -78,6 +77,14 @@ final public class SceneFactory {
     }
 
     private ContentViewInterface createView(String moduleName, String viewName, EventObject event, Pane content) {
+        ModuleConfiguratorInterface moduleConfiguration = config.getConfigForModule(moduleName);
+
+        Map<String, ContentViewInterface> moduleViews = moduleConfiguration.getViewEvents(content);
+        ContentViewInterface view = moduleViews.get(viewName);
+        if (view != null) {
+            view.initView(event);
+            return view;
+        }
         return null;
     }
 
@@ -108,7 +115,7 @@ final public class SceneFactory {
         menuBar.setPadding(new Insets(0, 0, 0, 0));
 
         for (String module : config.moduleKeys()) {
-            MenuBuilderInterface menu = config.getConfigForModule(module).getMenuBuilder();
+            MenuBuilderInterface menu = config.getConfigForModule(module).getMenuBuilder(this);
             List<MenuItem> menuItems = menu.getMenuList();
 
             Menu addDataMenu = new Menu(menu.getModuleMenuName());
@@ -151,5 +158,10 @@ final public class SceneFactory {
 
     private void setBackground(Region container) {
         container.setBackground(Background.EMPTY);
+    }
+
+    @Override
+    public void handle(ModuleEventInterface event) {
+        initScene(event.getModuleName(), event.getEventType(), new EventObject(event.getEventData()));
     }
 }
