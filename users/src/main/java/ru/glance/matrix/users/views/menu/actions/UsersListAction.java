@@ -1,12 +1,12 @@
-package users.views.menu.actions;
+package ru.glance.matrix.users.views.menu.actions;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import ru.glance.matrix.provider.interfaces.EventListenerInterface;
 import ru.glance.matrix.provider.interfaces.ModuleEventInterface;
-import users.dictionaries.ViewTypeDictionary;
-import users.models.User;
-import users.services.UserService;
+import ru.glance.matrix.users.dictionaries.ViewTypeDictionary;
+import ru.glance.matrix.users.models.User;
+import ru.glance.matrix.users.services.UserService;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package users.models;
+package ru.glance.matrix.users.models;
 
 /**
  * project: glcmtx

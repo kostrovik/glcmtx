@@ -1,4 +1,4 @@
-package users.dictionaries;
+package ru.glance.matrix.users.dictionaries;
 
 /**
  * project: glcmtx

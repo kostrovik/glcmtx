@@ -1,13 +1,13 @@
-package users.common;
+package ru.glance.matrix.users.common;
 
 import javafx.scene.layout.Pane;
 import ru.glance.matrix.provider.interfaces.ContentViewInterface;
 import ru.glance.matrix.provider.interfaces.EventListenerInterface;
 import ru.glance.matrix.provider.interfaces.MenuBuilderInterface;
 import ru.glance.matrix.provider.interfaces.ModuleConfiguratorInterface;
-import users.dictionaries.ViewTypeDictionary;
-import users.views.UsersListView;
-import users.views.menu.MenuBuilder;
+import ru.glance.matrix.users.dictionaries.ViewTypeDictionary;
+import ru.glance.matrix.users.views.UsersListView;
+import ru.glance.matrix.users.views.menu.MenuBuilder;
 
 import java.util.HashMap;
 import java.util.Map;

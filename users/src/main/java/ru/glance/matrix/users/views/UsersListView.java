@@ -1,4 +1,4 @@
-package users.views;
+package ru.glance.matrix.users.views;
 
 import ru.glance.matrix.graphics.common.ControlBuilderFacade;
 import ru.glance.matrix.helper.common.ApplicationLogger;
@@ -14,8 +14,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import ru.glance.matrix.provider.interfaces.ContentViewInterface;
-import users.models.User;
-import users.models.UserRole;
+import ru.glance.matrix.users.models.User;
+import ru.glance.matrix.users.models.UserRole;
 
 import java.util.Collection;
 import java.util.EventObject;

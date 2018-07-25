@@ -12,12 +12,12 @@ module users {
     requires provider;
     requires graphics;
 
-    exports users.common;
-    exports users.views;
-    exports users.views.menu;
-    exports users.views.menu.actions;
+    exports ru.glance.matrix.users.common;
+    exports ru.glance.matrix.users.views;
+    exports ru.glance.matrix.users.views.menu;
+    exports ru.glance.matrix.users.views.menu.actions;
 
-    opens users.models;
+    opens ru.glance.matrix.users.models;
 
-    provides ru.glance.matrix.provider.interfaces.ModuleConfiguratorInterface with users.common.Configurator;
+    provides ru.glance.matrix.provider.interfaces.ModuleConfiguratorInterface with ru.glance.matrix.users.common.Configurator;
 }

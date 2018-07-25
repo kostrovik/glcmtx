@@ -1,4 +1,4 @@
-package users.views.menu;
+package ru.glance.matrix.users.views.menu;
 
 import ru.glance.matrix.helper.common.ApplicationLogger;
 import ru.glance.matrix.helper.common.ConfigParser;

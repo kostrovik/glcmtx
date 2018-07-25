@@ -1,9 +1,9 @@
-package users.services;
+package ru.glance.matrix.users.services;
 
-import users.models.User;
-import users.models.UserAccount;
-import users.models.UserName;
-import users.models.UserRole;
+import ru.glance.matrix.users.models.User;
+import ru.glance.matrix.users.models.UserAccount;
+import ru.glance.matrix.users.models.UserName;
+import ru.glance.matrix.users.models.UserRole;
 
 import java.util.ArrayList;
 import java.util.List;
