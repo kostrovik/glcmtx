@@ -7,6 +7,7 @@
 module users {
     requires java.logging;
     requires javafx.controls;
+    requires com.fasterxml.jackson.core;
 
     requires helper;
     requires provider;
@@ -18,6 +19,8 @@ module users {
     exports ru.glance.matrix.users.views.menu.actions;
 
     opens ru.glance.matrix.users.models;
+
+    uses ru.glance.matrix.provider.interfaces.ServerConnectionInterface;
 
     provides ru.glance.matrix.provider.interfaces.ModuleConfiguratorInterface with ru.glance.matrix.users.common.Configurator;
 }

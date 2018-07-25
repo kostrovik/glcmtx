@@ -16,6 +16,12 @@ import java.util.List;
  */
 public class UserService {
     public List<User> getUsersList() {
+
+        ConnectionService connection = ConnectionService.getConnection();
+
+        String res = connection.sendGet("/");
+
+
         List<User> users = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {

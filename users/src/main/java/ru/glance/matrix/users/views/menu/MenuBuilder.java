@@ -30,7 +30,7 @@ import java.util.logging.Logger;
  */
 public class MenuBuilder implements MenuBuilderInterface {
     private static Logger logger = ApplicationLogger.getLogger(MenuBuilder.class.getName());
-    private final static String defaultConfigFilePath = "/users/configurations/menu_config.properties";
+    private final static String defaultConfigFilePath = "/ru/glance/matrix/users/configurations/menu_config.properties";
     private ConfigParser parser;
     private EventListenerInterface listener;
 
