@@ -8,6 +8,9 @@ import ru.glance.matrix.graphics.controls.notification.Notification;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * project: glcmtx
  * author:  kostrovik
@@ -51,5 +54,10 @@ public class ControlBuilderFacade {
     public <E, V> TableColumn<E, Boolean> createTableBooleanColumn(String columnName, String propertyName) {
         TableColumnBuilder<E, Boolean> builder = new TableColumnBuilder<>();
         return builder.createBooleanValueColumn(columnName, propertyName);
+    }
+
+    public <E, V> TableColumn<E, LocalDateTime> createTableLocalDateTimeColumn(String columnName, String propertyName, DateTimeFormatter formatter) {
+        TableColumnBuilder<E, LocalDateTime> builder = new TableColumnBuilder<>();
+        return builder.createLocalDateTimeValueColumn(columnName, propertyName, formatter);
     }
 }

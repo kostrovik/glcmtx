@@ -1,5 +1,6 @@
 package ru.glance.matrix.graphics.controls.field;
 
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.SkinBase;
@@ -29,7 +30,13 @@ public class LabeledTextFieldSkin extends SkinBase<LabeledTextField> {
 
         label = new Label(getSkinnable().getLabel());
 
+        Platform.runLater(() -> {
+            label.setMinWidth(label.getBoundsInLocal().getWidth());
+        });
+
         textField = new TextField();
+        textField.textProperty().addListener((observable, oldValue, newValue) -> getSkinnable().setText(newValue));
+
         HBox.setHgrow(textField, Priority.ALWAYS);
 
         group.getChildren().addAll(label, textField);

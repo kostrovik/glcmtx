@@ -13,9 +13,11 @@ import javafx.scene.control.Skin;
  */
 public class LabeledTextField extends Control {
     private final ObjectProperty<String> label;
+    private final ObjectProperty<String> text;
 
     public LabeledTextField(String label) {
         this.label = new SimpleObjectProperty<>();
+        this.text = new SimpleObjectProperty<>();
         setLabel(label);
     }
 
@@ -30,6 +32,20 @@ public class LabeledTextField extends Control {
 
     public void setLabel(String labelValue) {
         label.set(labelValue);
+    }
+    // -- свойсто название поля --
+
+    // свойсто текст
+    public ObjectProperty<String> textProperty() {
+        return text;
+    }
+
+    public String getText() {
+        return text.get();
+    }
+
+    public void setText(String textValue) {
+        text.set(textValue);
     }
     // -- свойсто название поля --
 

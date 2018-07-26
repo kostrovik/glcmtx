@@ -1,13 +1,12 @@
 package ru.glance.matrix.graphics.builders;
 
-import ru.glance.matrix.graphics.helper.PropertyReference;
-import ru.glance.matrix.helper.common.ApplicationLogger;
 import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TableColumn;
-import javafx.scene.text.Text;
 import javafx.util.Callback;
+import ru.glance.matrix.graphics.helper.PropertyReference;
+import ru.glance.matrix.helper.common.ApplicationLogger;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,15 +29,10 @@ public class CellPropertyValueFactory<S, T> implements Callback<TableColumn.Cell
 
     public CellPropertyValueFactory(String property) {
         this.property = property;
-        this.isMultiline = false;
     }
 
     public CellPropertyValueFactory(String property, boolean isMultiline) {
         this.property = property;
-        this.isMultiline = isMultiline;
-    }
-
-    public void setIsMultiline(boolean isMultiline) {
         this.isMultiline = isMultiline;
     }
 
@@ -69,28 +63,17 @@ public class CellPropertyValueFactory<S, T> implements Callback<TableColumn.Cell
             }
 
             if (propertyRef != null) {
-
-                TableColumn column = param.getTableColumn();
-
                 if (propertyRef.hasProperty()) {
                     return propertyRef.getProperty(rowData);
                 } else {
                     T value = propertyRef.get(rowData);
-
-                    Text text = new Text(value.toString());
-                    text.applyCss();
-                    if (!isMultiline) {
-                        if (column.getWidth() < text.getBoundsInLocal().getWidth() + 10) {
-                            column.setMinWidth(text.getBoundsInLocal().getWidth() + 10);
-                        }
-                    }
 
                     if (value instanceof Boolean) {
                         ReadOnlyBooleanWrapper booleanProp = new ReadOnlyBooleanWrapper((Boolean) value);
                         return (ObservableValue<T>) booleanProp;
                     }
 
-                    return new ReadOnlyObjectWrapper<T>(value);
+                    return new ReadOnlyObjectWrapper<>(value);
                 }
             }
         } catch (RuntimeException e) {

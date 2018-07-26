@@ -37,6 +37,7 @@ public class ButtonBuilder {
     private void setIcon(Button button, SolidIcons buttonIcon) {
         Text icon = new Text(buttonIcon.getSymbol());
         icon.setFont(buttonIcon.getFont());
+        icon.getStyleClass().add("icon");
         button.setGraphic(icon);
     }
 }

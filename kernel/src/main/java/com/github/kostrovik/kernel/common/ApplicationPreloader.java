@@ -1,9 +1,8 @@
 package com.github.kostrovik.kernel.common;
 
-import ru.glance.matrix.graphics.common.ControlBuilderFacade;
-import ru.glance.matrix.graphics.controls.notification.Notification;
-import ru.glance.matrix.graphics.controls.notification.NotificationType;
-import ru.glance.matrix.helper.common.ApplicationLogger;
+import com.github.kostrovik.kernel.interfaces.EventListenerInterface;
+import com.github.kostrovik.kernel.settings.ApplicationSettings;
+import com.github.kostrovik.kernel.views.ServerListView;
 import javafx.application.Platform;
 import javafx.application.Preloader;
 import javafx.geometry.Insets;
@@ -19,7 +18,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import com.github.kostrovik.kernel.interfaces.EventListenerInterface;
+import ru.glance.matrix.graphics.common.ControlBuilderFacade;
+import ru.glance.matrix.graphics.common.icons.SolidIcons;
+import ru.glance.matrix.graphics.controls.notification.Notification;
+import ru.glance.matrix.graphics.controls.notification.NotificationType;
+import ru.glance.matrix.helper.common.ApplicationLogger;
+import ru.glance.matrix.provider.interfaces.views.PopupWindowInterface;
 
 import java.util.EventObject;
 import java.util.HashMap;
@@ -36,6 +40,7 @@ import java.util.logging.Logger;
 public class ApplicationPreloader extends Preloader {
     private static Logger logger = ApplicationLogger.getLogger(ApplicationPreloader.class.getName());
 
+    private ApplicationSettings settings;
     private Stage stage;
     private EventListenerInterface consumer;
     private TextField userLogin;
@@ -45,6 +50,7 @@ public class ApplicationPreloader extends Preloader {
 
     public ApplicationPreloader(EventListenerInterface consumer) {
         this.consumer = consumer;
+        this.settings = ApplicationSettings.getInstance();
     }
 
     private Scene createLoginScene() {
@@ -92,9 +98,24 @@ public class ApplicationPreloader extends Preloader {
             }
         });
 
-        pane.getChildren().addAll(loginForm);
+        HBox settingsBlock = new HBox(10);
+        settingsBlock.getStyleClass().add("settings-block");
+        settingsBlock.setAlignment(Pos.CENTER_RIGHT);
+
+        Button serverListButton = facade.createButton("Сервера", SolidIcons.SERVER);
+        serverListButton.setOnAction(t -> {
+            createServersListScene();
+        });
+
+        settingsBlock.getChildren().addAll(serverListButton);
+
+        pane.getChildren().addAll(loginForm, settingsBlock);
         AnchorPane.setRightAnchor(loginForm, 20.0);
         AnchorPane.setTopAnchor(loginForm, 20.0);
+
+        AnchorPane.setRightAnchor(settingsBlock, 0.0);
+        AnchorPane.setLeftAnchor(settingsBlock, 0.0);
+        AnchorPane.setBottomAnchor(settingsBlock, 0.0);
 
         Scene preloader = new Scene(pane, 600, 400);
 
@@ -106,6 +127,11 @@ public class ApplicationPreloader extends Preloader {
         }
 
         return preloader;
+    }
+
+    private void createServersListScene() {
+        PopupWindowInterface view = new ServerListView(stage);
+        view.initView(new EventObject(settings.getHosts()));
     }
 
     private void disableForm(boolean isDisabled) {

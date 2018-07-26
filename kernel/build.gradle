@@ -5,7 +5,7 @@ plugins {
 group 'com.github.kostrovik'
 version '1.0-SNAPSHOT'
 def moduleName = 'kernel'
-def launcherClassName = 'kernel.common.AppCore'
+def launcherClassName = 'com.github.kostrovik.kernel.common.AppCore'
 
 sourceCompatibility = 10
 targetCompatibility = 10

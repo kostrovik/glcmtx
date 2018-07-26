@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'maven'
 }
 
 group 'com.github.kostrovik'
@@ -19,8 +20,6 @@ repositories {
 dependencies {
     testCompile("org.junit.jupiter:junit-jupiter-api:5.2.0")
     testRuntime("org.junit.jupiter:junit-jupiter-engine:5.2.0")
-
-    compile 'com.fasterxml.jackson.core:jackson-core:2.9.6'
 
     compile project(':helper')
     compile project(':provider')

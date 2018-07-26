@@ -16,6 +16,8 @@ module kernel {
 
     exports com.github.kostrovik.kernel.common;
 
+    opens com.github.kostrovik.kernel.models;
+
     uses ru.glance.matrix.provider.interfaces.ModuleConfiguratorInterface;
     provides ru.glance.matrix.provider.interfaces.ModuleConfiguratorInterface with com.github.kostrovik.kernel.common.Configurator;
     provides ru.glance.matrix.provider.interfaces.ServerConnectionInterface with com.github.kostrovik.kernel.common.ServerConnector;

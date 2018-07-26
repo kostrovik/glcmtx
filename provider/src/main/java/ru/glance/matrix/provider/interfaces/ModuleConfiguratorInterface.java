@@ -1,6 +1,8 @@
 package ru.glance.matrix.provider.interfaces;
 
 import javafx.scene.layout.Pane;
+import ru.glance.matrix.provider.interfaces.views.ContentViewInterface;
+import ru.glance.matrix.provider.interfaces.views.MenuBuilderInterface;
 
 import java.util.Map;
 

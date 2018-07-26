@@ -10,7 +10,9 @@ import javafx.scene.text.Font;
  * github:  https://github.com/kostrovik/glcmtx
  */
 public enum SolidIcons {
-    CARET_DOWN("\uf0d7");
+    CARET_DOWN("\uf0d7"),
+    SERVER("\uf233"),
+    DATA_BASE("\uf1c0");
 
     private final String character;
     private final Font font;

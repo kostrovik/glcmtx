@@ -11,6 +11,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ru.glance.matrix.provider.interfaces.*;
+import ru.glance.matrix.provider.interfaces.views.ContentViewInterface;
+import ru.glance.matrix.provider.interfaces.views.MenuBuilderInterface;
 
 import java.util.EventObject;
 import java.util.List;
@@ -29,7 +31,7 @@ final public class SceneFactory implements EventListenerInterface {
     private static Logger logger = ApplicationLogger.getLogger(SceneFactory.class.getName());
 
     /**
-     * Рефлективно внедряетмя при создании приложения. Когда в kernel.common.AppCore при вызове start() появляется
+     * Рефлективно внедряется при создании приложения. Когда в kernel.common.AppCore при вызове start() появляется
      * объект основного Stage приложения.
      */
     private static Stage mainWindow;

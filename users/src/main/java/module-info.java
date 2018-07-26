@@ -7,7 +7,6 @@
 module users {
     requires java.logging;
     requires javafx.controls;
-    requires com.fasterxml.jackson.core;
 
     requires helper;
     requires provider;

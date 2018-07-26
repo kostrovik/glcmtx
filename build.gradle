@@ -56,5 +56,5 @@ task addLauncher(type: Copy) {
 def java_home = System.getenv('JAVA_HOME')
 task link(type: Exec) {
     commandLine "${java_home}/bin/jlink", '--module-path', "${java_home}/jmods:modules",
-            '--add-modules', modules.join(","), '--launcher', "ApplicationLauncher=kernel/kernel.common.AppCore", '--output', 'javaImageBuild'
+            '--add-modules', modules.join(","), '--launcher', "ApplicationLauncher=kernel/com.github.kostrovik.kernel.common.AppCore", '--output', 'javaImageBuild'
 }

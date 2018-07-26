@@ -7,6 +7,9 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * project: glcmtx
  * author:  kostrovik
@@ -20,7 +23,6 @@ public class TableColumnBuilder<T, R> {
 
         Text columnNameText = new Text(columnName);
         columnNameText.applyCss();
-
         column.setMinWidth(columnNameText.getBoundsInLocal().getWidth() + 10);
 
         return column;
@@ -29,6 +31,34 @@ public class TableColumnBuilder<T, R> {
     public TableColumn<T, R> createStringValueColumn(String columnName, String property) {
         TableColumn<T, R> column = createColumn(columnName);
         column.setCellValueFactory(new CellPropertyValueFactory<>(property));
+
+        column.setCellFactory(new Callback<>() {
+            @Override
+            public TableCell<T, R> call(TableColumn<T, R> param) {
+                return new TableCell<>() {
+                    @Override
+                    public void updateItem(R item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setText(null);
+                        } else {
+                            if (item != null) {
+                                setText(item.toString());
+
+                                Text text = new Text(getText());
+                                text.applyCss();
+
+                                if (column.getMinWidth() < text.getBoundsInLocal().getWidth() + 10) {
+                                    column.setMinWidth(text.getBoundsInLocal().getWidth() + 10);
+                                }
+                            } else {
+                                setText(null);
+                            }
+                        }
+                    }
+                };
+            }
+        });
 
         return column;
     }
@@ -78,6 +108,29 @@ public class TableColumnBuilder<T, R> {
             CheckBoxTableCell<T, Boolean> cell = new CheckBoxTableCell<>();
             cell.setAlignment(Pos.CENTER);
             return cell;
+        });
+
+        return column;
+    }
+
+    public TableColumn<T, LocalDateTime> createLocalDateTimeValueColumn(String columnName, String property, DateTimeFormatter formatter) {
+        TableColumn<T, LocalDateTime> column = createColumn(columnName);
+        column.setCellValueFactory(new CellPropertyValueFactory<>(property));
+
+        column.setCellFactory(col -> new TableCell<>() {
+            @Override
+            protected void updateItem(LocalDateTime item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty)
+                    setText(null);
+                else {
+                    if (item != null) {
+                        setText(item.format(formatter));
+                    } else {
+                        setText(null);
+                    }
+                }
+            }
         });
 
         return column;

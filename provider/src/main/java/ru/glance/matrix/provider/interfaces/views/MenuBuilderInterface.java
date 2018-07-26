@@ -1,4 +1,4 @@
-package ru.glance.matrix.provider.interfaces;
+package ru.glance.matrix.provider.interfaces.views;
 
 import javafx.scene.control.MenuItem;
 

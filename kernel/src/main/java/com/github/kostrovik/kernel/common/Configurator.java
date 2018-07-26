@@ -1,9 +1,9 @@
 package com.github.kostrovik.kernel.common;
 
 import javafx.scene.layout.Pane;
-import ru.glance.matrix.provider.interfaces.ContentViewInterface;
+import ru.glance.matrix.provider.interfaces.views.ContentViewInterface;
 import ru.glance.matrix.provider.interfaces.EventListenerInterface;
-import ru.glance.matrix.provider.interfaces.MenuBuilderInterface;
+import ru.glance.matrix.provider.interfaces.views.MenuBuilderInterface;
 import ru.glance.matrix.provider.interfaces.ModuleConfiguratorInterface;
 import com.github.kostrovik.kernel.views.menu.MenuBuilder;
 
