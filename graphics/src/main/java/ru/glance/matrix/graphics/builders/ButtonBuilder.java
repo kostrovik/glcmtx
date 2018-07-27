@@ -5,24 +5,47 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
 /**
+ * Класс конструктор для создания кнопок приложения.
+ * Используется для создания обычных кнопок и кнопок с иконками.
+ * Для создания иконок использует словарь с иконками SolidIcons.
+ * <p>
  * project: glcmtx
  * author:  kostrovik
  * date:    20/07/2018
  * github:  https://github.com/kostrovik/glcmtx
  */
 public class ButtonBuilder {
+    /**
+     * Создает простую кнопку с надписью.
+     *
+     * @param buttonLabel the button label
+     * @return the button
+     */
     public Button createButton(String buttonLabel) {
         Button button = new Button();
         setLabel(button, buttonLabel);
         return button;
     }
 
+    /**
+     * Создает простую кнопку с иконкой.
+     *
+     * @param buttonIcon the button icon
+     * @return the button
+     */
     public Button createButton(SolidIcons buttonIcon) {
         Button button = new Button();
         setIcon(button, buttonIcon);
         return button;
     }
 
+    /**
+     * Создает комбинированную кнопку с иконкой и надписью.
+     *
+     * @param buttonIcon  the button icon
+     * @param buttonLabel the button label
+     * @return the button
+     */
     public Button createButton(SolidIcons buttonIcon, String buttonLabel) {
         Button button = new Button();
         setIcon(button, buttonIcon);

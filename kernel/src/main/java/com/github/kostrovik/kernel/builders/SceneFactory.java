@@ -1,5 +1,6 @@
 package com.github.kostrovik.kernel.builders;
 
+import com.github.kostrovik.kernel.settings.ApplicationSettings;
 import ru.glance.matrix.helper.common.ApplicationLogger;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -39,10 +40,12 @@ final public class SceneFactory implements EventListenerInterface {
     private static volatile SceneFactory factory;
     private static Map<String, ContentViewInterface> storage;
     private static ModulesConfigBuilder config;
+    private static ApplicationSettings settings;
 
     private SceneFactory() {
         storage = new ConcurrentHashMap<>();
         config = ModulesConfigBuilder.getInstance();
+        settings = ApplicationSettings.getInstance();
     }
 
     public static SceneFactory getInstance() {
@@ -104,7 +107,7 @@ final public class SceneFactory implements EventListenerInterface {
         content.prefHeightProperty().bind(vbox.heightProperty());
 
         try {
-            scene.getStylesheets().add(Class.forName(this.getClass().getName()).getResource("/styles/themes/admin-theme.css").toExternalForm());
+            scene.getStylesheets().add(Class.forName(this.getClass().getName()).getResource(String.format("/styles/themes/%s", settings.getDetaultTheme())).toExternalForm());
         } catch (ClassNotFoundException error) {
             logger.log(Level.WARNING, "Ошибка загрузки стилей.", error);
         }

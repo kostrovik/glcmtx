@@ -15,6 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Класс настройка логгера для приложения.
+ *
  * project: glcmtx
  * author:  kostrovik
  * date:    19/07/2018

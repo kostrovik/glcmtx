@@ -2,6 +2,7 @@ package com.github.kostrovik.kernel.common;
 
 import com.github.kostrovik.kernel.interfaces.EventListenerInterface;
 import com.github.kostrovik.kernel.settings.ApplicationSettings;
+import com.github.kostrovik.kernel.views.ColorThemesListView;
 import com.github.kostrovik.kernel.views.ServerListView;
 import javafx.application.Platform;
 import javafx.application.Preloader;
@@ -9,8 +10,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -20,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import ru.glance.matrix.graphics.common.ControlBuilderFacade;
 import ru.glance.matrix.graphics.common.icons.SolidIcons;
+import ru.glance.matrix.graphics.controls.field.LabeledTextField;
 import ru.glance.matrix.graphics.controls.notification.Notification;
 import ru.glance.matrix.graphics.controls.notification.NotificationType;
 import ru.glance.matrix.helper.common.ApplicationLogger;
@@ -43,34 +43,34 @@ public class ApplicationPreloader extends Preloader {
     private ApplicationSettings settings;
     private Stage stage;
     private EventListenerInterface consumer;
-    private TextField userLogin;
-    private PasswordField userPassword;
+    private LabeledTextField userLogin;
+    private LabeledTextField userPassword;
     private Button enterButton;
     private Notification formNotification;
+    private ControlBuilderFacade facade;
 
     public ApplicationPreloader(EventListenerInterface consumer) {
         this.consumer = consumer;
         this.settings = ApplicationSettings.getInstance();
+        this.facade = new ControlBuilderFacade();
     }
 
     private Scene createLoginScene() {
-        ControlBuilderFacade facade = new ControlBuilderFacade();
-
         AnchorPane pane = new AnchorPane();
 
         VBox loginForm = new VBox(10);
         loginForm.setPadding(new Insets(10, 10, 10, 10));
         loginForm.setPrefWidth(300);
 
-        userLogin = new TextField();
-        userLogin.setPromptText("login");
-        loginForm.getChildren().add(userLogin);
+        userLogin = facade.createTextField("Логин");
         userLogin.addEventFilter(KeyEvent.KEY_RELEASED, event -> formNotification.setIsVisible(false));
 
-        userPassword = new PasswordField();
-        userPassword.setPromptText("password");
-        loginForm.getChildren().add(userPassword);
+        loginForm.getChildren().add(userLogin);
+
+        userPassword = facade.createPasswordField("Пароль");
         userPassword.addEventFilter(KeyEvent.KEY_RELEASED, event -> formNotification.setIsVisible(false));
+
+        loginForm.getChildren().add(userPassword);
 
         enterButton = facade.createButton("Войти");
         enterButton.setOnAction(t -> {
@@ -98,16 +98,7 @@ public class ApplicationPreloader extends Preloader {
             }
         });
 
-        HBox settingsBlock = new HBox(10);
-        settingsBlock.getStyleClass().add("settings-block");
-        settingsBlock.setAlignment(Pos.CENTER_RIGHT);
-
-        Button serverListButton = facade.createButton("Сервера", SolidIcons.SERVER);
-        serverListButton.setOnAction(t -> {
-            createServersListScene();
-        });
-
-        settingsBlock.getChildren().addAll(serverListButton);
+        HBox settingsBlock = createSettingsBlock();
 
         pane.getChildren().addAll(loginForm, settingsBlock);
         AnchorPane.setRightAnchor(loginForm, 20.0);
@@ -121,7 +112,7 @@ public class ApplicationPreloader extends Preloader {
 
         try {
             preloader.getStylesheets().add(Class.forName(this.getClass().getName()).getResource("/styles/preloader.css").toExternalForm());
-            preloader.getStylesheets().add(Class.forName(this.getClass().getName()).getResource("/styles/themes/admin-theme.css").toExternalForm());
+            preloader.getStylesheets().add(Class.forName(this.getClass().getName()).getResource(String.format("/styles/themes/%s", settings.getDetaultTheme())).toExternalForm());
         } catch (ClassNotFoundException error) {
             logger.log(Level.WARNING, "Ошибка загрузки изображения для preloader.", error);
         }
@@ -129,9 +120,30 @@ public class ApplicationPreloader extends Preloader {
         return preloader;
     }
 
+    private HBox createSettingsBlock() {
+        HBox settingsBlock = new HBox(10);
+        settingsBlock.getStyleClass().add("settings-block");
+        settingsBlock.setAlignment(Pos.CENTER_RIGHT);
+
+        Button serverListButton = facade.createButton("Серверы", SolidIcons.DATA_BASE);
+        serverListButton.setOnAction(t -> createServersListScene());
+
+        Button colorThemesButton = facade.createButton("Цветовая тема", SolidIcons.PALETTE);
+        colorThemesButton.setOnAction(t -> createColorThemesListScene());
+
+        settingsBlock.getChildren().addAll(serverListButton, colorThemesButton);
+
+        return settingsBlock;
+    }
+
     private void createServersListScene() {
         PopupWindowInterface view = new ServerListView(stage);
         view.initView(new EventObject(settings.getHosts()));
+    }
+
+    private void createColorThemesListScene() {
+        PopupWindowInterface view = new ColorThemesListView(stage);
+        view.initView(new EventObject(settings.getDetaultTheme()));
     }
 
     private void disableForm(boolean isDisabled) {

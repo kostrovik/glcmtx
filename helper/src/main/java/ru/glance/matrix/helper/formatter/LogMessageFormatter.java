@@ -4,6 +4,8 @@ import java.util.logging.LogRecord;
 import java.util.logging.SimpleFormatter;
 
 /**
+ * Объект форматтер для сообщений лога.
+ * <p>
  * project: glcmtx
  * author:  kostrovik
  * date:    19/07/2018

@@ -24,8 +24,10 @@ public class AppCore extends Application {
     private static Logger logger = ApplicationLogger.getLogger(AppCore.class.getName());
     private static Preloader preloader;
     private static Stage mainStage;
+    private static SceneFactory factory;
 
     private static void initScene() {
+        factory.initScene("kernel", "main", null);
         Platform.runLater(() -> mainStage.show());
     }
 
@@ -62,9 +64,6 @@ public class AppCore extends Application {
 
         mainStage = mainWindow;
         instantiateSceneFactory();
-
-        SceneFactory factory = SceneFactory.getInstance();
-        factory.initScene("kernel", "main", null);
         mainWindow.setTitle("Glance Matrix");
 
         setStageSize(mainWindow);
@@ -88,7 +87,7 @@ public class AppCore extends Application {
     }
 
     private static void instantiateSceneFactory() {
-        SceneFactory factory = SceneFactory.getInstance();
+        factory = SceneFactory.getInstance();
         Class<? extends SceneFactory> factoryClass = factory.getClass();
 
         try {

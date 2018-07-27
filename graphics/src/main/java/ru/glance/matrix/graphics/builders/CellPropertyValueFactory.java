@@ -12,6 +12,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Служебный класс для получения значений из объектов разных типов.
+ * Используется при создании ячеек таблицы.
+ *
  * project: glcmtx
  * author:  kostrovik
  * date:    25/07/2018
@@ -20,8 +23,10 @@ import java.util.logging.Logger;
 public class CellPropertyValueFactory<S, T> implements Callback<TableColumn.CellDataFeatures<S, T>, ObservableValue<T>> {
     private static Logger logger = ApplicationLogger.getLogger(CellPropertyValueFactory.class.getName());
 
+    /**
+     * Название атрибута объекта значение которого необходимо получить.
+     */
     private final String property;
-    private boolean isMultiline;
 
     private Class<?> columnClass;
     private String previousProperty;
@@ -29,11 +34,6 @@ public class CellPropertyValueFactory<S, T> implements Callback<TableColumn.Cell
 
     public CellPropertyValueFactory(String property) {
         this.property = property;
-    }
-
-    public CellPropertyValueFactory(String property, boolean isMultiline) {
-        this.property = property;
-        this.isMultiline = isMultiline;
     }
 
     @Override
@@ -45,6 +45,13 @@ public class CellPropertyValueFactory<S, T> implements Callback<TableColumn.Cell
         return property;
     }
 
+    /**
+     * Использует рефлесию для получения getter и setter методов для доступа к атрибуту объекта.
+     *
+     * @param param   the param
+     * @param rowData the row data
+     * @return the cell data reflectively
+     */
     private ObservableValue<T> getCellDataReflectively(TableColumn.CellDataFeatures<S, T> param, S rowData) {
         if (getProperty() == null || getProperty().isEmpty() || rowData == null) return null;
 

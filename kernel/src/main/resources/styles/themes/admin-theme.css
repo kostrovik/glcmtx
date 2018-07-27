@@ -1,12 +1,20 @@
 .root{
+    -styleMenuTextColor-color: #ffffff;
+    -styleButtonBackground-color: #326eb2;
+    -styleTableBackground-color: #505050;
+    -styleTableSelectedRow-color: #326eb2;
+    -styleTableText-color: #ffffff;
+    -styleTextFieldBackground-color: #808080;
+    -styleTextFieldBorder-color: #2B2B2B;
+    -styleTextFieldText-color: #ffffff;
+    -styleTextFieldFocused-color: #326eb2;
+
     -fx-background-color: #404040;
     -fx-background: #404040;
 }
 
 .menu-bar{
     -fx-background-color: derive(#404040, -20%);
-
-    -styleMenuTextColor-color: #ffffff;
 }
 
 .menu-bar .label {
@@ -59,7 +67,6 @@
     -fx-border-radius: 6px;
     -fx-background-color: -styleButtonBackground-color;
     -fx-text-fill: #ffffff;
-    -styleButtonBackground-color: #326eb2;
 }
 
 .button:hover{
@@ -71,9 +78,6 @@
 }
 
 .table-view {
-    -styleTableBackground-color: #505050;
-    -styleTableSelectedRow-color: #326eb2;
-    -styleTableText-color: #ffffff;
     -fx-background-color: -styleTableBackground-color;
 }
 
@@ -121,11 +125,6 @@
 }
 
 .text-field{
-    -styleTextFieldBackground-color: #808080;
-    -styleTextFieldBorder-color: #2B2B2B;
-    -styleTextFieldText-color: #ffffff;
-    -styleTextFieldFocused-color: #326eb2;
-
     -fx-background-color: -styleTextFieldBackground-color;
     -fx-border-color: -styleTextFieldBorder-color;
     -fx-border-width: 1;

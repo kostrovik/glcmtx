@@ -3,6 +3,7 @@ package ru.glance.matrix.graphics.controls.field;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.SkinBase;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -22,6 +23,11 @@ public class LabeledTextFieldSkin extends SkinBase<LabeledTextField> {
     public LabeledTextFieldSkin(LabeledTextField control) {
         super(control);
         createSkin();
+        control.editableProperty().addListener(observable -> lockTextField());
+    }
+
+    private void lockTextField() {
+        textField.setEditable(getSkinnable().isEditable());
     }
 
     private void createSkin() {
@@ -34,7 +40,7 @@ public class LabeledTextFieldSkin extends SkinBase<LabeledTextField> {
             label.setMinWidth(label.getBoundsInLocal().getWidth());
         });
 
-        textField = new TextField();
+        textField = getSkinnable().isPassoword() ? new PasswordField() : new TextField();
         textField.textProperty().addListener((observable, oldValue, newValue) -> getSkinnable().setText(newValue));
 
         HBox.setHgrow(textField, Priority.ALWAYS);

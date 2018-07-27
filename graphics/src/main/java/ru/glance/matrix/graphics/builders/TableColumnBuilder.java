@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
+ * Класс конструктор для создания колонок таблицы.
+ * <p>
  * project: glcmtx
  * author:  kostrovik
  * date:    24/07/2018
@@ -18,6 +20,14 @@ import java.time.format.DateTimeFormatter;
  */
 public class TableColumnBuilder<T, R> {
 
+    /**
+     * Создает колонку для любого типа значения и ставит ей минимальную ширину по названию колонки.
+     *
+     * @param <T>        the type parameter
+     * @param <R>        the type parameter
+     * @param columnName the column name
+     * @return the table column
+     */
     public <T, R> TableColumn<T, R> createColumn(String columnName) {
         TableColumn<T, R> column = new TableColumn<>(columnName);
 
@@ -28,22 +38,29 @@ public class TableColumnBuilder<T, R> {
         return column;
     }
 
-    public TableColumn<T, R> createStringValueColumn(String columnName, String property) {
-        TableColumn<T, R> column = createColumn(columnName);
+    /**
+     * Создает колонку для строковых значений и устанавливает ей минимальную ширину по содержимому.
+     *
+     * @param columnName the column name
+     * @param property   the property
+     * @return the table column
+     */
+    public TableColumn<T, String> createStringValueColumn(String columnName, String property) {
+        TableColumn<T, String> column = createColumn(columnName);
         column.setCellValueFactory(new CellPropertyValueFactory<>(property));
 
         column.setCellFactory(new Callback<>() {
             @Override
-            public TableCell<T, R> call(TableColumn<T, R> param) {
+            public TableCell<T, String> call(TableColumn<T, String> param) {
                 return new TableCell<>() {
                     @Override
-                    public void updateItem(R item, boolean empty) {
+                    public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
                         if (empty) {
                             setText(null);
                         } else {
                             if (item != null) {
-                                setText(item.toString());
+                                setText(item);
 
                                 Text text = new Text(getText());
                                 text.applyCss();
@@ -63,12 +80,19 @@ public class TableColumnBuilder<T, R> {
         return column;
     }
 
-    public TableColumn<T, R> createMultilineStringValueColumn(String columnName, String property) {
-        TableColumn<T, R> column = createColumn(columnName);
-        column.setCellValueFactory(new CellPropertyValueFactory<>(property, true));
+    /**
+     * Создает колонку для многострочного значения которое переносится построчно при уменьшении ширины колонки.
+     *
+     * @param columnName the column name
+     * @param property   the property
+     * @return the table column
+     */
+    public TableColumn<T, String> createMultilineStringValueColumn(String columnName, String property) {
+        TableColumn<T, String> column = createColumn(columnName);
+        column.setCellValueFactory(new CellPropertyValueFactory<>(property));
         column.setCellFactory(new Callback<>() {
             @Override
-            public TableCell<T, R> call(TableColumn<T, R> param) {
+            public TableCell<T, String> call(TableColumn<T, String> param) {
                 return new TableCell<>() {
                     private Text cellText;
 
@@ -79,10 +103,10 @@ public class TableColumnBuilder<T, R> {
                     }
 
                     @Override
-                    public void updateItem(R item, boolean empty) {
+                    public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
                         if (!isEmpty() && !isEditing()) {
-                            cellText = createText(item.toString());
+                            cellText = createText(item);
                             setGraphic(cellText);
                         }
                     }
@@ -100,6 +124,13 @@ public class TableColumnBuilder<T, R> {
         return column;
     }
 
+    /**
+     * Создает колонку для значений типа boolean которые отображаются в таблице как checkbox.
+     *
+     * @param columnName the column name
+     * @param property   the property
+     * @return the table column
+     */
     public TableColumn<T, Boolean> createBooleanValueColumn(String columnName, String property) {
         TableColumn<T, Boolean> column = createColumn(columnName);
         column.setCellValueFactory(new CellPropertyValueFactory<>(property));
@@ -113,6 +144,14 @@ public class TableColumnBuilder<T, R> {
         return column;
     }
 
+    /**
+     * Создает колонку для значений типа LocalDateTime с возможностью задать формат выводимого значения.
+     *
+     * @param columnName the column name
+     * @param property   the property
+     * @param formatter  the formatter
+     * @return the table column
+     */
     public TableColumn<T, LocalDateTime> createLocalDateTimeValueColumn(String columnName, String property, DateTimeFormatter formatter) {
         TableColumn<T, LocalDateTime> column = createColumn(columnName);
         column.setCellValueFactory(new CellPropertyValueFactory<>(property));

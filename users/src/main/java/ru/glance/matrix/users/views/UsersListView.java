@@ -72,9 +72,9 @@ public class UsersListView implements ContentViewInterface {
         TableView<User> table = new TableView<>();
         table.setEditable(false);
 
-        TableColumn<User, String> id = facade.createTableColumn("Идентификатор", "id");
+        TableColumn<User, String> id = facade.createTableStringColumn("Идентификатор", "id");
 
-        TableColumn<User, String> name = facade.createTableColumn("ФИО", "fullName");
+        TableColumn<User, String> name = facade.createTableStringColumn("ФИО", "fullName");
 
         TableColumn<User, String> roles = facade.createTableColumn("Роли");
 
@@ -98,7 +98,7 @@ public class UsersListView implements ContentViewInterface {
             return new ReadOnlyObjectWrapper<>(data);
         });
 
-        TableColumn<User, String> email = facade.createTableColumn("E-mail", "email");
+        TableColumn<User, String> email = facade.createTableStringColumn("E-mail", "email");
 
         TableColumn<User, Boolean> isPhysicalPerson = facade.createTableBooleanColumn("Физ. лицо", "physicalPerson");
 

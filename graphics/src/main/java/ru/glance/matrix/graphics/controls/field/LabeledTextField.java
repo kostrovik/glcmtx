@@ -14,11 +14,19 @@ import javafx.scene.control.Skin;
 public class LabeledTextField extends Control {
     private final ObjectProperty<String> label;
     private final ObjectProperty<String> text;
+    private final ObjectProperty<Boolean> editable;
+    private boolean isPassoword;
 
     public LabeledTextField(String label) {
         this.label = new SimpleObjectProperty<>();
-        this.text = new SimpleObjectProperty<>();
+        this.text = new SimpleObjectProperty<>("");
+        this.editable = new SimpleObjectProperty<>();
         setLabel(label);
+    }
+
+    public LabeledTextField(String label, boolean isPassoword) {
+        this(label);
+        this.isPassoword = isPassoword;
     }
 
     // свойсто название поля
@@ -48,6 +56,24 @@ public class LabeledTextField extends Control {
         text.set(textValue);
     }
     // -- свойсто название поля --
+
+    // свойсто редактирования
+    public ObjectProperty<Boolean> editableProperty() {
+        return editable;
+    }
+
+    public Boolean isEditable() {
+        return editable.get();
+    }
+
+    public void setEditable(Boolean editableValue) {
+        editable.set(editableValue);
+    }
+    // -- свойсто редактирования --
+
+    public boolean isPassoword(){
+        return isPassoword;
+    }
 
     @Override
     protected Skin<?> createDefaultSkin() {

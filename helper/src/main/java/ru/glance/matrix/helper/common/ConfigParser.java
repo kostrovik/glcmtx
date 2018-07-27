@@ -6,6 +6,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Служебный класс для парсинга различных объектов Properties и создания из них вложенного дерева на основе Map.
+ *
  * project: glcmtx
  * author:  kostrovik
  * date:    23/07/2018

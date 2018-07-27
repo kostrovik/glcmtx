@@ -1,6 +1,7 @@
 package com.github.kostrovik.kernel.settings;
 
 import com.github.kostrovik.kernel.builders.SceneFactory;
+import com.github.kostrovik.kernel.dictionaries.ColorThemeDictionary;
 import com.github.kostrovik.kernel.models.ServerConnectionAddress;
 import ru.glance.matrix.helper.common.ApplicationLogger;
 import ru.glance.matrix.helper.common.ConfigParser;
@@ -107,6 +108,18 @@ public class ApplicationSettings {
             return String.format("%s@%s", host.getUrl(), host.getLastUsage());
         }).collect(Collectors.toList())));
 
+        writeSettings(properties);
+        parser = new ConfigParser(readSettings());
+    }
+
+    public String getDetaultTheme() {
+        Object colorTheme = parser.getConfigProperty("colorTheme");
+        return colorTheme != null ? (String) colorTheme : ColorThemeDictionary.LIGHT.getThemeName();
+    }
+
+    public void saveDefaultColorTheme(String theme) {
+        Properties properties = readSettings();
+        properties.setProperty("colorTheme", theme);
         writeSettings(properties);
         parser = new ConfigParser(readSettings());
     }

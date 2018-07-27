@@ -10,6 +10,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Служебный объект используемый при получении значений для ячеек таблиц.
+ * Представляет собой ссылочный объект на getter и setter методы.
+ *
  * project: glcmtx
  * author:  kostrovik
  * date:    25/07/2018

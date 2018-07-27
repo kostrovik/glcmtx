@@ -80,7 +80,7 @@ public class ServerListView implements PopupWindowInterface {
         Scene serverListWindow = new Scene(content, 800, 600);
 
         try {
-            serverListWindow.getStylesheets().add(Class.forName(this.getClass().getName()).getResource("/styles/themes/admin-theme.css").toExternalForm());
+            serverListWindow.getStylesheets().add(Class.forName(this.getClass().getName()).getResource(String.format("/styles/themes/%s", settings.getDetaultTheme())).toExternalForm());
         } catch (ClassNotFoundException error) {
             logger.log(Level.WARNING, "Ошибка загрузки стилей.", error);
         }
@@ -150,8 +150,10 @@ public class ServerListView implements PopupWindowInterface {
         newHost.setMinWidth(200);
 
         addButton.setOnAction(event -> {
-            ServerConnectionAddress newAddress = new ServerConnectionAddress(newHost.getText());
-            data.add(newAddress);
+            if (!addButton.isCancelButton()) {
+                ServerConnectionAddress newAddress = new ServerConnectionAddress(newHost.getText());
+                data.add(newAddress);
+            }
         });
 
         HBox formView = new HBox(10);
@@ -168,7 +170,7 @@ public class ServerListView implements PopupWindowInterface {
         table.setEditable(true);
         table.setSelectionModel(null);
 
-        TableColumn<ServerConnectionAddress, String> url = facade.createTableColumn("URL сервера", "url");
+        TableColumn<ServerConnectionAddress, String> url = facade.createTableStringColumn("URL сервера", "url");
         TableColumn<ServerConnectionAddress, LocalDateTime> lastUsage = facade.createTableLocalDateTimeColumn("Последнее соединение", "lastUsage", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
         TableColumn<ServerConnectionAddress, Boolean> isDefault = facade.createTableBooleanColumn("Установлен по умолчанию", "default");
 

@@ -5,6 +5,10 @@
     -fx-background-position: center center;
 }
 
+.label {
+    -fx-text-fill: #ffffff;
+}
+
 .settings-block{
     -fx-background-color: #202020;
     -fx-background: #202020;
@@ -15,6 +19,7 @@
     -fx-border-radius: 0;
     -fx-background-color: transparent;
     -fx-text-fill: #ffffff;
+    -fx-effect: none;
 }
 
 .settings-block .button:hover{

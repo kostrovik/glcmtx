@@ -4,6 +4,9 @@ import ru.glance.matrix.graphics.config.ModuleSettings;
 import javafx.scene.text.Font;
 
 /**
+ * Словарь иконок.
+ * Использует иконочный шрифт font-awesome (https://fontawesome.com).
+ *
  * project: glcmtx
  * author:  kostrovik
  * date:    20/07/2018
@@ -12,7 +15,8 @@ import javafx.scene.text.Font;
 public enum SolidIcons {
     CARET_DOWN("\uf0d7"),
     SERVER("\uf233"),
-    DATA_BASE("\uf1c0");
+    DATA_BASE("\uf1c0"),
+    PALETTE("\uf53f");
 
     private final String character;
     private final Font font;
