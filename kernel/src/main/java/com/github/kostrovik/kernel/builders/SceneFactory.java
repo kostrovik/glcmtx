@@ -1,7 +1,6 @@
 package com.github.kostrovik.kernel.builders;
 
 import com.github.kostrovik.kernel.settings.ApplicationSettings;
-import ru.glance.matrix.helper.common.ApplicationLogger;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -10,10 +9,11 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-import ru.glance.matrix.provider.interfaces.*;
-import ru.glance.matrix.provider.interfaces.views.ContentViewInterface;
-import ru.glance.matrix.provider.interfaces.views.MenuBuilderInterface;
+import ru.glance.matrix.helper.common.ApplicationLogger;
+import ru.glance.matrix.provider.interfaces.ModuleConfiguratorInterface;
+import ru.glance.matrix.provider.interfaces.views.*;
 
 import java.util.EventObject;
 import java.util.List;
@@ -28,7 +28,7 @@ import java.util.logging.Logger;
  * date:    21/07/2018
  * github:  https://github.com/kostrovik/glcmtx
  */
-final public class SceneFactory implements EventListenerInterface {
+final public class SceneFactory implements ViewEventListenerInterface {
     private static Logger logger = ApplicationLogger.getLogger(SceneFactory.class.getName());
 
     /**
@@ -59,8 +59,32 @@ final public class SceneFactory implements EventListenerInterface {
         return factory;
     }
 
-    public void initScene(String moduleName, String viewName, EventObject event) {
-        Scene scene = getSceneTemplate();
+    public static SceneFactory provider() {
+        return getInstance();
+    }
+
+    public void initScene(String moduleName, String viewName, LayoutType layoutType, EventObject event) {
+        Scene scene;
+        Stage stage = null;
+
+        switch (layoutType) {
+            case TAB:
+                scene = getDefaultSceneTemplate();
+
+                break;
+            case POPUP:
+                scene = getPopupSceneTemplate();
+                stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initOwner(mainWindow);
+
+                break;
+            default:
+                scene = getDefaultSceneTemplate();
+
+                break;
+        }
+
         Pane content = (Pane) scene.lookup("#scene-content");
 
         ContentViewInterface contentView;
@@ -68,23 +92,28 @@ final public class SceneFactory implements EventListenerInterface {
             contentView = storage.get(moduleName + "_" + viewName);
             contentView.initView(event);
         } else {
-            contentView = createView(moduleName, viewName, event, content);
+            contentView = createView(moduleName, viewName, event, content, stage);
         }
 
 
-        if (contentView != null && contentView.getView() != null) {
+        if (contentView != null) {
             content.getChildren().setAll(contentView.getView());
         } else {
             content.getChildren().setAll(errorCreateScene(content));
         }
 
-        mainWindow.setScene(scene);
+        if (layoutType.equals(LayoutType.POPUP) && stage != null) {
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            mainWindow.setScene(scene);
+        }
     }
 
-    private ContentViewInterface createView(String moduleName, String viewName, EventObject event, Pane content) {
+    private ContentViewInterface createView(String moduleName, String viewName, EventObject event, Pane content, Stage stage) {
         ModuleConfiguratorInterface moduleConfiguration = config.getConfigForModule(moduleName);
 
-        Map<String, ContentViewInterface> moduleViews = moduleConfiguration.getViewEvents(content);
+        Map<String, ContentViewInterface> moduleViews = moduleConfiguration.getViewEvents(content, stage);
         ContentViewInterface view = moduleViews.get(viewName);
         if (view != null) {
             view.initView(event);
@@ -93,7 +122,7 @@ final public class SceneFactory implements EventListenerInterface {
         return null;
     }
 
-    private Scene getSceneTemplate() {
+    private Scene getDefaultSceneTemplate() {
         VBox vbox = new VBox();
         Scene scene = new Scene(vbox);
 
@@ -115,12 +144,35 @@ final public class SceneFactory implements EventListenerInterface {
         return scene;
     }
 
+    private Scene getPopupSceneTemplate() {
+        VBox vbox = new VBox(10);
+
+        Scene scene = new Scene(vbox, 980, 760);
+
+        Pane content = new Pane();
+        content.setId("scene-content");
+        vbox.getChildren().addAll(content);
+
+        setBackground(content);
+
+        content.prefWidthProperty().bind(vbox.widthProperty());
+        content.prefHeightProperty().bind(vbox.heightProperty());
+
+        try {
+            scene.getStylesheets().add(Class.forName(this.getClass().getName()).getResource(String.format("/styles/themes/%s", settings.getDetaultTheme())).toExternalForm());
+        } catch (ClassNotFoundException error) {
+            logger.log(Level.WARNING, "Ошибка загрузки стилей.", error);
+        }
+
+        return scene;
+    }
+
     private MenuBar getSceneMenu() {
         MenuBar menuBar = new MenuBar();
         menuBar.setPadding(new Insets(0, 0, 0, 0));
 
         for (String module : config.moduleKeys()) {
-            MenuBuilderInterface menu = config.getConfigForModule(module).getMenuBuilder(this);
+            MenuBuilderInterface menu = config.getConfigForModule(module).getMenuBuilder();
             List<MenuItem> menuItems = menu.getMenuList();
 
             Menu addDataMenu = new Menu(menu.getModuleMenuName());
@@ -166,7 +218,7 @@ final public class SceneFactory implements EventListenerInterface {
     }
 
     @Override
-    public void handle(ModuleEventInterface event) {
-        initScene(event.getModuleName(), event.getEventType(), new EventObject(event.getEventData()));
+    public void handle(ViewEventInterface event) {
+        initScene(event.getModuleName(), event.getViewName(), event.getLayoutType(), new EventObject(event.getEventData()));
     }
 }

@@ -1,4 +1,4 @@
-package ru.glance.matrix.provider.interfaces;
+package ru.glance.matrix.provider.interfaces.views;
 
 /**
  * project: glcmtx
@@ -6,10 +6,12 @@ package ru.glance.matrix.provider.interfaces;
  * date:    24/07/2018
  * github:  https://github.com/kostrovik/glcmtx
  */
-public interface ModuleEventInterface {
+public interface ViewEventInterface {
     String getModuleName();
 
-    String getEventType();
+    String getViewName();
 
     Object getEventData();
+
+    LayoutType getLayoutType();
 }

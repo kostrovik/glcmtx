@@ -1,19 +1,25 @@
 package ru.glance.matrix.users.views;
 
-import ru.glance.matrix.graphics.common.ControlBuilderFacade;
-import ru.glance.matrix.helper.common.ApplicationLogger;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import ru.glance.matrix.graphics.common.ControlBuilderFacade;
+import ru.glance.matrix.helper.common.ApplicationLogger;
 import ru.glance.matrix.provider.interfaces.views.ContentViewInterface;
+import ru.glance.matrix.provider.interfaces.views.LayoutType;
+import ru.glance.matrix.provider.interfaces.views.ViewEventInterface;
+import ru.glance.matrix.provider.interfaces.views.ViewEventListenerInterface;
+import ru.glance.matrix.users.common.Configurator;
+import ru.glance.matrix.users.dictionaries.ViewTypeDictionary;
 import ru.glance.matrix.users.models.User;
 import ru.glance.matrix.users.models.UserRole;
 
@@ -109,6 +115,40 @@ public class UsersListView implements ContentViewInterface {
 
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
+
+        table.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
+                showUserEditor(table.getSelectionModel().getSelectedItem());
+
+            }
+        });
+
         return table;
+    }
+
+    private void showUserEditor(User user) {
+        Configurator configurator = new Configurator();
+        ViewEventListenerInterface listener = configurator.getEventListener();
+        listener.handle(new ViewEventInterface() {
+            @Override
+            public String getModuleName() {
+                return UsersListView.class.getModule().getName();
+            }
+
+            @Override
+            public String getViewName() {
+                return ViewTypeDictionary.USER_VIEW.name();
+            }
+
+            @Override
+            public Object getEventData() {
+                return user;
+            }
+
+            @Override
+            public LayoutType getLayoutType() {
+                return LayoutType.POPUP;
+            }
+        });
     }
 }

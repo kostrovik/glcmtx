@@ -2,7 +2,6 @@ package com.github.kostrovik.kernel.views.menu.actions;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import ru.glance.matrix.provider.interfaces.EventListenerInterface;
 
 /**
  * project: glcmtx
@@ -11,12 +10,6 @@ import ru.glance.matrix.provider.interfaces.EventListenerInterface;
  * github:  https://github.com/kostrovik/glcmtx
  */
 public class ExitAction implements EventHandler<ActionEvent> {
-    private EventListenerInterface listener;
-
-    public ExitAction(EventListenerInterface listener) {
-        this.listener = listener;
-    }
-
     @Override
     public void handle(ActionEvent event) {
         System.exit(0);

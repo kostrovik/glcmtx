@@ -1,12 +1,8 @@
-package com.github.kostrovik.kernel.views;
+package ru.glance.matrix.users.views;
 
-import com.github.kostrovik.kernel.dictionaries.ColorThemeDictionary;
-import com.github.kostrovik.kernel.settings.ApplicationSettings;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
@@ -16,6 +12,7 @@ import javafx.stage.Stage;
 import ru.glance.matrix.graphics.common.ControlBuilderFacade;
 import ru.glance.matrix.helper.common.ApplicationLogger;
 import ru.glance.matrix.provider.interfaces.views.PopupWindowInterface;
+import ru.glance.matrix.users.models.User;
 
 import java.util.EventObject;
 import java.util.logging.Logger;
@@ -26,25 +23,23 @@ import java.util.logging.Logger;
  * date:    27/07/2018
  * github:  https://github.com/kostrovik/glcmtx
  */
-public class ColorThemesListView implements PopupWindowInterface {
-    private static Logger logger = ApplicationLogger.getLogger(ColorThemesListView.class.getName());
+public class UserEditorView implements PopupWindowInterface {
+    private static Logger logger = ApplicationLogger.getLogger(UserEditorView.class.getName());
 
     private ControlBuilderFacade facade;
     private Stage stage;
-    private ApplicationSettings settings;
-    private String selectedTheme;
     private Pane parent;
+    private User user;
 
-    public ColorThemesListView(Pane parent, Stage stage) {
+    public UserEditorView(Pane parent, Stage stage) {
         this.facade = new ControlBuilderFacade();
         this.stage = stage;
-        this.settings = ApplicationSettings.getInstance();
         this.parent = parent;
     }
 
     @Override
     public void initView(EventObject event) {
-        selectedTheme = settings.getDetaultTheme();
+        user = (User) event.getSource();
     }
 
     @Override
@@ -55,16 +50,13 @@ public class ColorThemesListView implements PopupWindowInterface {
         view.prefWidthProperty().bind(parent.widthProperty());
         view.prefHeightProperty().bind(parent.heightProperty());
 
-        VBox table = createTable();
-        table.prefHeightProperty().bind(view.heightProperty());
-
-        view.getChildren().setAll(viewTitle(), table, viewButtons());
+        view.getChildren().setAll(viewTitle(), viewButtons());
 
         return view;
     }
 
     private Region viewTitle() {
-        Text title = new Text("Выбор цветовой темы приложения.");
+        Text title = new Text("Редактирование данных пользователя.");
         title.getStyleClass().add("view-title");
 
         HBox titleView = new HBox(10);
@@ -79,7 +71,8 @@ public class ColorThemesListView implements PopupWindowInterface {
         Button cancelButton = facade.createButton("Отмена");
 
         saveButton.setOnAction(event -> {
-            settings.saveDefaultColorTheme(selectedTheme);
+//            settings.saveHostsList(data);
+//            data.setAll(settings.getHosts());
             stage.close();
         });
 
@@ -91,34 +84,5 @@ public class ColorThemesListView implements PopupWindowInterface {
         buttonView.setAlignment(Pos.CENTER_RIGHT);
 
         return buttonView;
-    }
-
-    private VBox createTable() {
-        VBox buttons = new VBox(10);
-        ToggleGroup group = new ToggleGroup();
-
-        RadioButton lightTheme = new RadioButton("Ligth");
-        lightTheme.setToggleGroup(group);
-
-        lightTheme.setSelected(selectedTheme.equals(ColorThemeDictionary.LIGHT.getThemeName()));
-
-        lightTheme.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                selectedTheme = ColorThemeDictionary.LIGHT.getThemeName();
-            }
-        });
-
-        RadioButton darkAdmin = new RadioButton("Dark-admin");
-        darkAdmin.setToggleGroup(group);
-        darkAdmin.selectedProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                selectedTheme = ColorThemeDictionary.DARK_ADMIN.getThemeName();
-            }
-        });
-        darkAdmin.setSelected(selectedTheme.equals(ColorThemeDictionary.DARK_ADMIN.getThemeName()));
-
-        buttons.getChildren().addAll(lightTheme, darkAdmin);
-
-        return buttons;
     }
 }

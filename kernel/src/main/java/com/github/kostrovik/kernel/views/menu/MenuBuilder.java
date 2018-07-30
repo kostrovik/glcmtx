@@ -1,11 +1,10 @@
 package com.github.kostrovik.kernel.views.menu;
 
-import ru.glance.matrix.helper.common.ApplicationLogger;
-import ru.glance.matrix.helper.common.ConfigParser;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
-import ru.glance.matrix.provider.interfaces.EventListenerInterface;
+import ru.glance.matrix.helper.common.ApplicationLogger;
+import ru.glance.matrix.helper.common.ConfigParser;
 import ru.glance.matrix.provider.interfaces.views.MenuBuilderInterface;
 
 import java.io.FileNotFoundException;
@@ -32,11 +31,9 @@ public class MenuBuilder implements MenuBuilderInterface {
     private static Logger logger = ApplicationLogger.getLogger(MenuBuilder.class.getName());
     private final static String defaultConfigFilePath = "/configurations/menu_config.properties";
     private ConfigParser parser;
-    private EventListenerInterface listener;
 
-    public MenuBuilder(EventListenerInterface listener) {
+    public MenuBuilder() {
         this.parser = new ConfigParser(loadConfig());
-        this.listener = listener;
     }
 
     @Override
@@ -58,7 +55,7 @@ public class MenuBuilder implements MenuBuilderInterface {
 
     @Override
     public String getModuleMenuName() {
-        return "Главное";
+        return "Основное";
     }
 
     private EventHandler<ActionEvent> prepareAction(String actionClassName) {
@@ -66,8 +63,8 @@ public class MenuBuilder implements MenuBuilderInterface {
         Class<?> actionClass;
         try {
             actionClass = Class.forName(actionClassName);
-            Constructor<?> constructor = actionClass.getDeclaredConstructor(EventListenerInterface.class);
-            action = (EventHandler<ActionEvent>) constructor.newInstance(listener);
+            Constructor<?> constructor = actionClass.getDeclaredConstructor();
+            action = (EventHandler<ActionEvent>) constructor.newInstance();
         } catch (ClassNotFoundException e) {
             logger.log(Level.SEVERE, String.format("Для пункта меню не найден класс action %s.", actionClassName), e);
         } catch (NoSuchMethodException e) {

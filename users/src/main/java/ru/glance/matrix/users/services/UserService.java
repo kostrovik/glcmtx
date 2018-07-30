@@ -25,8 +25,8 @@ public class UserService {
         List<User> users = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {
-            UserName name = new UserName("test", "last test");
-            UserAccount account = new UserAccount("mainl@mainl.com", "test", "test");
+            UserName name = new UserName("test", "last test" + i);
+            UserAccount account = new UserAccount("mainl@mainl.com" + i, "test", "test");
 
             List<UserRole> roles = new ArrayList<>();
             roles.add(new UserRole("admin", "Администратор"));

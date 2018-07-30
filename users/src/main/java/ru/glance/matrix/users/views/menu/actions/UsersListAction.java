@@ -2,13 +2,12 @@ package ru.glance.matrix.users.views.menu.actions;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import ru.glance.matrix.provider.interfaces.EventListenerInterface;
-import ru.glance.matrix.provider.interfaces.ModuleEventInterface;
+import ru.glance.matrix.provider.interfaces.views.LayoutType;
+import ru.glance.matrix.provider.interfaces.views.ViewEventInterface;
+import ru.glance.matrix.provider.interfaces.views.ViewEventListenerInterface;
+import ru.glance.matrix.users.common.Configurator;
 import ru.glance.matrix.users.dictionaries.ViewTypeDictionary;
-import ru.glance.matrix.users.models.User;
 import ru.glance.matrix.users.services.UserService;
-
-import java.util.List;
 
 /**
  * project: glcmtx
@@ -17,33 +16,36 @@ import java.util.List;
  * github:  https://github.com/kostrovik/glcmtx
  */
 public class UsersListAction implements EventHandler<ActionEvent> {
-    private EventListenerInterface listener;
     private UserService service;
 
-    public UsersListAction(EventListenerInterface listener) {
-        this.listener = listener;
+    public UsersListAction() {
         service = new UserService();
     }
 
     @Override
     public void handle(ActionEvent event) {
-        ModuleEventInterface moduleEvent = new ModuleEventInterface() {
+        Configurator configurator = new Configurator();
+        ViewEventListenerInterface listener = configurator.getEventListener();
+        listener.handle(new ViewEventInterface() {
             @Override
             public String getModuleName() {
-                return "users";
+                return UsersListAction.class.getModule().getName();
             }
 
             @Override
-            public String getEventType() {
+            public String getViewName() {
                 return ViewTypeDictionary.USERS_LIST.name();
             }
 
             @Override
             public Object getEventData() {
-                List<User> users = service.getUsersList();
-                return users;
+                return service.getUsersList();
             }
-        };
-        listener.handle(moduleEvent);
+
+            @Override
+            public LayoutType getLayoutType() {
+                return LayoutType.DEFAULT;
+            }
+        });
     }
 }

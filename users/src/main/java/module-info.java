@@ -20,6 +20,8 @@ module users {
     opens ru.glance.matrix.users.models;
 
     uses ru.glance.matrix.provider.interfaces.ServerConnectionInterface;
+    uses ru.glance.matrix.provider.interfaces.ApplicationSettingsInterface;
+    uses ru.glance.matrix.provider.interfaces.views.ViewEventListenerInterface;
 
     provides ru.glance.matrix.provider.interfaces.ModuleConfiguratorInterface with ru.glance.matrix.users.common.Configurator;
 }

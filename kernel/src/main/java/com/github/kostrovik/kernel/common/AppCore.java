@@ -1,13 +1,14 @@
 package com.github.kostrovik.kernel.common;
 
-import ru.glance.matrix.helper.common.ApplicationLogger;
+import com.github.kostrovik.kernel.builders.SceneFactory;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.application.Preloader;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import com.github.kostrovik.kernel.builders.SceneFactory;
+import ru.glance.matrix.helper.common.ApplicationLogger;
+import ru.glance.matrix.provider.interfaces.views.LayoutType;
 
 import java.lang.reflect.Field;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class AppCore extends Application {
     private static SceneFactory factory;
 
     private static void initScene() {
-        factory.initScene("kernel", "main", null);
+        factory.initScene(AppCore.class.getModule().getName(), "main", LayoutType.DEFAULT, null);
         Platform.runLater(() -> mainStage.show());
     }
 

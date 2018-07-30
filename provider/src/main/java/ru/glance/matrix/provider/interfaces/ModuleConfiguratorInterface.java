@@ -1,8 +1,10 @@
 package ru.glance.matrix.provider.interfaces;
 
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import ru.glance.matrix.provider.interfaces.views.ContentViewInterface;
 import ru.glance.matrix.provider.interfaces.views.MenuBuilderInterface;
+import ru.glance.matrix.provider.interfaces.views.ViewEventListenerInterface;
 
 import java.util.Map;
 
@@ -13,7 +15,9 @@ import java.util.Map;
  * github:  https://github.com/kostrovik/glcmtx
  */
 public interface ModuleConfiguratorInterface {
-    MenuBuilderInterface getMenuBuilder(EventListenerInterface listener);
+    MenuBuilderInterface getMenuBuilder();
 
-    Map<String, ContentViewInterface> getViewEvents(Pane content);
+    Map<String, ContentViewInterface> getViewEvents(Pane content, Stage stage);
+
+    ViewEventListenerInterface getEventListener();
 }

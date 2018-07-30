@@ -1,9 +1,8 @@
 package com.github.kostrovik.kernel.common;
 
+import com.github.kostrovik.kernel.dictionaries.ViewTypeDictionary;
 import com.github.kostrovik.kernel.interfaces.EventListenerInterface;
 import com.github.kostrovik.kernel.settings.ApplicationSettings;
-import com.github.kostrovik.kernel.views.ColorThemesListView;
-import com.github.kostrovik.kernel.views.ServerListView;
 import javafx.application.Platform;
 import javafx.application.Preloader;
 import javafx.geometry.Insets;
@@ -23,7 +22,9 @@ import ru.glance.matrix.graphics.controls.field.LabeledTextField;
 import ru.glance.matrix.graphics.controls.notification.Notification;
 import ru.glance.matrix.graphics.controls.notification.NotificationType;
 import ru.glance.matrix.helper.common.ApplicationLogger;
-import ru.glance.matrix.provider.interfaces.views.PopupWindowInterface;
+import ru.glance.matrix.provider.interfaces.views.LayoutType;
+import ru.glance.matrix.provider.interfaces.views.ViewEventInterface;
+import ru.glance.matrix.provider.interfaces.views.ViewEventListenerInterface;
 
 import java.util.EventObject;
 import java.util.HashMap;
@@ -137,13 +138,55 @@ public class ApplicationPreloader extends Preloader {
     }
 
     private void createServersListScene() {
-        PopupWindowInterface view = new ServerListView(stage);
-        view.initView(new EventObject(settings.getHosts()));
+        Configurator configurator = new Configurator();
+        ViewEventListenerInterface listener = configurator.getEventListener();
+        listener.handle(new ViewEventInterface() {
+            @Override
+            public String getModuleName() {
+                return ApplicationPreloader.class.getModule().getName();
+            }
+
+            @Override
+            public String getViewName() {
+                return ViewTypeDictionary.DATA_BASE_SERVER_LIST.name();
+            }
+
+            @Override
+            public Object getEventData() {
+                return settings.getHosts();
+            }
+
+            @Override
+            public LayoutType getLayoutType() {
+                return LayoutType.POPUP;
+            }
+        });
     }
 
     private void createColorThemesListScene() {
-        PopupWindowInterface view = new ColorThemesListView(stage);
-        view.initView(new EventObject(settings.getDetaultTheme()));
+        Configurator configurator = new Configurator();
+        ViewEventListenerInterface listener = configurator.getEventListener();
+        listener.handle(new ViewEventInterface() {
+            @Override
+            public String getModuleName() {
+                return ApplicationPreloader.class.getModule().getName();
+            }
+
+            @Override
+            public String getViewName() {
+                return ViewTypeDictionary.COLOR_THEME_LIST.name();
+            }
+
+            @Override
+            public Object getEventData() {
+                return settings.getDetaultTheme();
+            }
+
+            @Override
+            public LayoutType getLayoutType() {
+                return LayoutType.POPUP;
+            }
+        });
     }
 
     private void disableForm(boolean isDisabled) {
