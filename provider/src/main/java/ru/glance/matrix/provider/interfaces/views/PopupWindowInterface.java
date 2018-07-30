@@ -1,5 +1,7 @@
 package ru.glance.matrix.provider.interfaces.views;
 
+import javafx.stage.Stage;
+
 /**
  * project: glcmtx
  * author:  kostrovik
@@ -7,4 +9,5 @@ package ru.glance.matrix.provider.interfaces.views;
  * github:  https://github.com/kostrovik/glcmtx
  */
 public interface PopupWindowInterface extends ContentViewInterface {
+    void setStage(Stage stage);
 }

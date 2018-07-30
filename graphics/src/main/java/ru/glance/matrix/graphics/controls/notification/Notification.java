@@ -20,6 +20,7 @@ public class Notification extends Control {
         this.isVisible = new SimpleObjectProperty<>();
         this.message = new SimpleObjectProperty<>();
         this.type = new SimpleObjectProperty<>();
+        setFocusTraversable(false);
     }
 
     @Override

@@ -49,6 +49,7 @@ public class ServerListView implements PopupWindowInterface {
     private Stage stage;
     private ApplicationSettings settings;
     private Pane parent;
+    private VBox view;
 
     public ServerListView(Pane parent, Stage stage) {
         this.data = FXCollections.observableArrayList();
@@ -57,15 +58,26 @@ public class ServerListView implements PopupWindowInterface {
         this.stage = stage;
         this.settings = ApplicationSettings.getInstance();
         this.parent = parent;
+
+        this.view = createView();
     }
 
     @Override
     public void initView(EventObject event) {
-        data.addAll((Collection<? extends ServerConnectionAddress>) event.getSource());
+        data.setAll((Collection<? extends ServerConnectionAddress>) event.getSource());
+    }
+
+    @Override
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     @Override
     public Region getView() {
+        return view;
+    }
+
+    private VBox createView() {
         VBox view = new VBox(10);
         view.setPadding(new Insets(10, 10, 10, 10));
 

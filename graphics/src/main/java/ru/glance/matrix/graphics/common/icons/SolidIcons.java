@@ -1,18 +1,19 @@
 package ru.glance.matrix.graphics.common.icons;
 
-import ru.glance.matrix.graphics.config.ModuleSettings;
 import javafx.scene.text.Font;
+import ru.glance.matrix.graphics.config.ModuleSettings;
+import ru.glance.matrix.provider.interfaces.controls.IconInterface;
 
 /**
  * Словарь иконок.
  * Использует иконочный шрифт font-awesome (https://fontawesome.com).
- *
+ * <p>
  * project: glcmtx
  * author:  kostrovik
  * date:    20/07/2018
  * github:  https://github.com/kostrovik/glcmtx
  */
-public enum SolidIcons {
+public enum SolidIcons implements IconInterface {
     CARET_DOWN("\uf0d7"),
     SERVER("\uf233"),
     DATA_BASE("\uf1c0"),

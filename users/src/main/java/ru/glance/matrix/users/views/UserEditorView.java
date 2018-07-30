@@ -43,6 +43,11 @@ public class UserEditorView implements PopupWindowInterface {
     }
 
     @Override
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    @Override
     public Region getView() {
         VBox view = new VBox(10);
         view.setPadding(new Insets(10, 10, 10, 10));

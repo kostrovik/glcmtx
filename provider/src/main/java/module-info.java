@@ -9,4 +9,5 @@ module provider {
 
     exports ru.glance.matrix.provider.interfaces;
     exports ru.glance.matrix.provider.interfaces.views;
+    exports ru.glance.matrix.provider.interfaces.controls;
 }

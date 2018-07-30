@@ -1,8 +1,10 @@
 package ru.glance.matrix.graphics.builders;
 
-import ru.glance.matrix.graphics.common.icons.SolidIcons;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.text.Text;
+import ru.glance.matrix.graphics.common.ButtonIconPosition;
+import ru.glance.matrix.graphics.common.icons.SolidIcons;
 
 /**
  * Класс конструктор для создания кнопок приложения.
@@ -62,5 +64,23 @@ public class ButtonBuilder {
         icon.setFont(buttonIcon.getFont());
         icon.getStyleClass().add("icon");
         button.setGraphic(icon);
+    }
+
+    public Button setIconPosition(Button button, ButtonIconPosition position) {
+        switch (position) {
+            case TOP:
+                button.setContentDisplay(ContentDisplay.TOP);
+                break;
+            case LEFT:
+                button.setContentDisplay(ContentDisplay.LEFT);
+                break;
+            case RIGHT:
+                button.setContentDisplay(ContentDisplay.RIGHT);
+                break;
+            case BOTTOM:
+                button.setContentDisplay(ContentDisplay.BOTTOM);
+                break;
+        }
+        return button;
     }
 }

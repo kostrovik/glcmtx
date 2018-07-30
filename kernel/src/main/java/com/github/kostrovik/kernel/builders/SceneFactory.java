@@ -73,10 +73,10 @@ final public class SceneFactory implements ViewEventListenerInterface {
 
                 break;
             case POPUP:
-                scene = getPopupSceneTemplate();
                 stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
                 stage.initOwner(mainWindow);
+                scene = getPopupSceneTemplate();
 
                 break;
             default:
@@ -93,10 +93,15 @@ final public class SceneFactory implements ViewEventListenerInterface {
             contentView.initView(event);
         } else {
             contentView = createView(moduleName, viewName, event, content, stage);
+            storage.put(moduleName + "_" + viewName, contentView);
         }
 
 
         if (contentView != null) {
+            if (contentView instanceof PopupWindowInterface) {
+                ((PopupWindowInterface) contentView).setStage(stage);
+            }
+
             content.getChildren().setAll(contentView.getView());
         } else {
             content.getChildren().setAll(errorCreateScene(content));

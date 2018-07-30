@@ -24,7 +24,7 @@ public class UsersListAction implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent event) {
-        Configurator configurator = new Configurator();
+        Configurator configurator = Configurator.getConfig();
         ViewEventListenerInterface listener = configurator.getEventListener();
         listener.handle(new ViewEventInterface() {
             @Override

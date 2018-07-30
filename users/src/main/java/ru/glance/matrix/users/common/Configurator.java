@@ -4,6 +4,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import ru.glance.matrix.helper.common.ApplicationLogger;
 import ru.glance.matrix.provider.interfaces.ModuleConfiguratorInterface;
+import ru.glance.matrix.provider.interfaces.controls.ControlBuilderFacadeInterface;
 import ru.glance.matrix.provider.interfaces.views.ContentViewInterface;
 import ru.glance.matrix.provider.interfaces.views.MenuBuilderInterface;
 import ru.glance.matrix.provider.interfaces.views.ViewEventListenerInterface;
@@ -25,8 +26,29 @@ import java.util.logging.Logger;
  * date:    23/07/2018
  * github:  https://github.com/kostrovik/glcmtx
  */
-public class Configurator implements ModuleConfiguratorInterface {
+final public class Configurator implements ModuleConfiguratorInterface {
     private static Logger logger = ApplicationLogger.getLogger(Configurator.class.getName());
+    private static volatile Configurator configurator;
+    private static Map<String, ContentViewInterface> views;
+
+    private Configurator() {
+        views = new HashMap<>();
+    }
+
+    public static Configurator provider() {
+        return getConfig();
+    }
+
+    public static Configurator getConfig() {
+        if (configurator == null) {
+            synchronized (Configurator.class) {
+                if (configurator == null) {
+                    configurator = new Configurator();
+                }
+            }
+        }
+        return configurator;
+    }
 
     @Override
     public MenuBuilderInterface getMenuBuilder() {
@@ -35,19 +57,21 @@ public class Configurator implements ModuleConfiguratorInterface {
 
     @Override
     public Map<String, ContentViewInterface> getViewEvents(Pane content, Stage stage) {
-        Map<String, ContentViewInterface> views = new HashMap<>();
-
-        views.put(ViewTypeDictionary.USERS_LIST.name(), new UsersListView(content));
-        views.put(ViewTypeDictionary.USER_VIEW.name(), new UserEditorView(content, stage));
+        if (views.isEmpty()) {
+            synchronized (Configurator.class) {
+                if (views.isEmpty()) {
+                    views.put(ViewTypeDictionary.USERS_LIST.name(), new UsersListView(content));
+                    views.put(ViewTypeDictionary.USER_VIEW.name(), new UserEditorView(content, stage));
+                }
+            }
+        }
 
         return views;
     }
 
     @Override
     public ViewEventListenerInterface getEventListener() {
-        ServiceLoader<ViewEventListenerInterface> serviceLoader = ServiceLoader.load(ModuleLayer.boot(), ViewEventListenerInterface.class);
-
-        Optional<ViewEventListenerInterface> applicationSettings = serviceLoader.findFirst();
+        Optional<ViewEventListenerInterface> applicationSettings = getFirstLoadedImplementation(ViewEventListenerInterface.class);
 
         if (applicationSettings.isPresent()) {
             return applicationSettings.get();
@@ -55,5 +79,21 @@ public class Configurator implements ModuleConfiguratorInterface {
         logger.log(Level.SEVERE, String.format("Не найден контейнер view приложения. Модуль: %s", this.getClass().getModule().getName()));
 
         return null;
+    }
+
+    @Override
+    public ControlBuilderFacadeInterface getControlBuilder() {
+        Optional<ControlBuilderFacadeInterface> controlBuilderFacade = getFirstLoadedImplementation(ControlBuilderFacadeInterface.class);
+
+        if (controlBuilderFacade.isPresent()) {
+            return controlBuilderFacade.get();
+        }
+        logger.log(Level.SEVERE, String.format("Не найден фасад для построения элементов интерфейса. Модуль: %s", this.getClass().getModule().getName()));
+
+        return null;
+    }
+
+    private <E> Optional<E> getFirstLoadedImplementation(Class<E> type) {
+        return ServiceLoader.load(ModuleLayer.boot(), type).findFirst();
     }
 }

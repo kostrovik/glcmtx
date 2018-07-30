@@ -103,6 +103,10 @@
     -fx-effect: innershadow(gaussian, derive(-styleButtonHover-color, -10%), 4, 0.3, 0, 0);
 }
 
+.button:focused{
+    -fx-effect: dropshadow(two-pass-box, derive(-styleButtonHover-color, +10%), 5, 0.7, 0, 0);
+}
+
 .button:cancel {
     -fx-background-insets:0;
     -fx-background: derive(-styleButtonBackground-color, +70%);

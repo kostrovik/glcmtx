@@ -2,6 +2,7 @@ package ru.glance.matrix.provider.interfaces;
 
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import ru.glance.matrix.provider.interfaces.controls.ControlBuilderFacadeInterface;
 import ru.glance.matrix.provider.interfaces.views.ContentViewInterface;
 import ru.glance.matrix.provider.interfaces.views.MenuBuilderInterface;
 import ru.glance.matrix.provider.interfaces.views.ViewEventListenerInterface;
@@ -20,4 +21,6 @@ public interface ModuleConfiguratorInterface {
     Map<String, ContentViewInterface> getViewEvents(Pane content, Stage stage);
 
     ViewEventListenerInterface getEventListener();
+
+    ControlBuilderFacadeInterface getControlBuilder();
 }

@@ -69,8 +69,15 @@
     -fx-text-fill: #ffffff;
 }
 
-.button:hover{
+.button:hover,
+.button:hover:focused {
     -fx-background-color: derive(-styleButtonBackground-color, -20%);
+    -fx-effect: none;
+}
+
+.button:focused{
+    -fx-background-color: derive(-styleButtonBackground-color, -15%);
+    -fx-effect: dropshadow(two-pass-box, derive(-styleButtonBackground-color, +10%), 5, 0.7, 0, 0);
 }
 
 .button:cancel{

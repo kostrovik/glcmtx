@@ -1,5 +1,6 @@
 package com.github.kostrovik.kernel.views;
 
+import com.github.kostrovik.kernel.common.Configurator;
 import com.github.kostrovik.kernel.dictionaries.ColorThemeDictionary;
 import com.github.kostrovik.kernel.settings.ApplicationSettings;
 import javafx.geometry.Insets;
@@ -13,11 +14,12 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import ru.glance.matrix.graphics.common.ControlBuilderFacade;
 import ru.glance.matrix.helper.common.ApplicationLogger;
+import ru.glance.matrix.provider.interfaces.controls.ControlBuilderFacadeInterface;
 import ru.glance.matrix.provider.interfaces.views.PopupWindowInterface;
 
 import java.util.EventObject;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 /**
@@ -29,17 +31,22 @@ import java.util.logging.Logger;
 public class ColorThemesListView implements PopupWindowInterface {
     private static Logger logger = ApplicationLogger.getLogger(ColorThemesListView.class.getName());
 
-    private ControlBuilderFacade facade;
     private Stage stage;
     private ApplicationSettings settings;
     private String selectedTheme;
     private Pane parent;
+    private VBox view;
+    private ControlBuilderFacadeInterface facade;
+    private Configurator configurator;
 
     public ColorThemesListView(Pane parent, Stage stage) {
-        this.facade = new ControlBuilderFacade();
         this.stage = stage;
         this.settings = ApplicationSettings.getInstance();
         this.parent = parent;
+        this.selectedTheme = settings.getDetaultTheme();
+        this.configurator = Configurator.getConfig();
+        this.facade = Objects.requireNonNull(configurator.getControlBuilder());
+        this.view = createView();
     }
 
     @Override
@@ -48,7 +55,16 @@ public class ColorThemesListView implements PopupWindowInterface {
     }
 
     @Override
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    @Override
     public Region getView() {
+        return view;
+    }
+
+    private VBox createView() {
         VBox view = new VBox(10);
         view.setPadding(new Insets(10, 10, 10, 10));
 

@@ -127,7 +127,7 @@ public class UsersListView implements ContentViewInterface {
     }
 
     private void showUserEditor(User user) {
-        Configurator configurator = new Configurator();
+        Configurator configurator = Configurator.getConfig();
         ViewEventListenerInterface listener = configurator.getEventListener();
         listener.handle(new ViewEventInterface() {
             @Override

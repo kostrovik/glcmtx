@@ -9,19 +9,20 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import ru.glance.matrix.graphics.common.ControlBuilderFacade;
 import ru.glance.matrix.graphics.common.icons.SolidIcons;
-import ru.glance.matrix.graphics.controls.field.LabeledTextField;
 import ru.glance.matrix.graphics.controls.notification.Notification;
 import ru.glance.matrix.graphics.controls.notification.NotificationType;
 import ru.glance.matrix.helper.common.ApplicationLogger;
+import ru.glance.matrix.provider.interfaces.controls.ControlBuilderFacadeInterface;
 import ru.glance.matrix.provider.interfaces.views.LayoutType;
 import ru.glance.matrix.provider.interfaces.views.ViewEventInterface;
 import ru.glance.matrix.provider.interfaces.views.ViewEventListenerInterface;
@@ -29,6 +30,7 @@ import ru.glance.matrix.provider.interfaces.views.ViewEventListenerInterface;
 import java.util.EventObject;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -44,16 +46,18 @@ public class ApplicationPreloader extends Preloader {
     private ApplicationSettings settings;
     private Stage stage;
     private EventListenerInterface consumer;
-    private LabeledTextField userLogin;
-    private LabeledTextField userPassword;
+    private TextField userLogin;
+    private TextField userPassword;
     private Button enterButton;
     private Notification formNotification;
-    private ControlBuilderFacade facade;
+    private ControlBuilderFacadeInterface facade;
+    private Configurator configurator;
 
     public ApplicationPreloader(EventListenerInterface consumer) {
         this.consumer = consumer;
         this.settings = ApplicationSettings.getInstance();
-        this.facade = new ControlBuilderFacade();
+        this.configurator = Configurator.getConfig();
+        this.facade = Objects.requireNonNull(configurator.getControlBuilder());
     }
 
     private Scene createLoginScene() {
@@ -63,15 +67,16 @@ public class ApplicationPreloader extends Preloader {
         loginForm.setPadding(new Insets(10, 10, 10, 10));
         loginForm.setPrefWidth(300);
 
-        userLogin = facade.createTextField("Логин");
+        GridPane formLayout = facade.createTableFormLayout();
+        userLogin = (TextField) facade.addTextField(formLayout, "Логин");
+
         userLogin.addEventFilter(KeyEvent.KEY_RELEASED, event -> formNotification.setIsVisible(false));
 
-        loginForm.getChildren().add(userLogin);
+        userPassword = (TextField) facade.addPasswordField(formLayout, "Пароль");
 
-        userPassword = facade.createPasswordField("Пароль");
         userPassword.addEventFilter(KeyEvent.KEY_RELEASED, event -> formNotification.setIsVisible(false));
 
-        loginForm.getChildren().add(userPassword);
+        loginForm.getChildren().add(formLayout);
 
         enterButton = facade.createButton("Войти");
         enterButton.setOnAction(t -> {
@@ -88,7 +93,7 @@ public class ApplicationPreloader extends Preloader {
 
         loginForm.getChildren().add(buttons);
 
-        formNotification = facade.createFormNotification();
+        formNotification = (Notification) facade.createFormNotification();
 
         loginForm.getChildren().add(formNotification);
 
@@ -138,7 +143,6 @@ public class ApplicationPreloader extends Preloader {
     }
 
     private void createServersListScene() {
-        Configurator configurator = new Configurator();
         ViewEventListenerInterface listener = configurator.getEventListener();
         listener.handle(new ViewEventInterface() {
             @Override
@@ -164,7 +168,6 @@ public class ApplicationPreloader extends Preloader {
     }
 
     private void createColorThemesListScene() {
-        Configurator configurator = new Configurator();
         ViewEventListenerInterface listener = configurator.getEventListener();
         listener.handle(new ViewEventInterface() {
             @Override
