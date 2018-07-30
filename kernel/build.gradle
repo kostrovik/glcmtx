@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'idea'
 }
 
 group 'com.github.kostrovik'
@@ -29,6 +30,12 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+idea {
+    module {
+        inheritOutputDirs = true
+    }
 }
 
 jar {

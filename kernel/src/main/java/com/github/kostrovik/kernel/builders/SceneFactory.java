@@ -87,24 +87,20 @@ final public class SceneFactory implements ViewEventListenerInterface {
 
         Pane content = (Pane) scene.lookup("#scene-content");
 
-        ContentViewInterface contentView;
-        if (storage.containsKey(moduleName + "_" + viewName)) {
-            contentView = storage.get(moduleName + "_" + viewName);
-            contentView.initView(event);
+        ContentViewInterface contentView = storage.getOrDefault(moduleName + "_" + viewName, createView(moduleName, viewName, content, stage));
+
+        if (contentView == null) {
+            content.getChildren().setAll(errorCreateScene(content));
         } else {
-            contentView = createView(moduleName, viewName, event, content, stage);
-            storage.put(moduleName + "_" + viewName, contentView);
-        }
-
-
-        if (contentView != null) {
             if (contentView instanceof PopupWindowInterface) {
                 ((PopupWindowInterface) contentView).setStage(stage);
             }
 
+            storage.putIfAbsent(moduleName + "_" + viewName, contentView);
+
+            contentView.initView(event);
+
             content.getChildren().setAll(contentView.getView());
-        } else {
-            content.getChildren().setAll(errorCreateScene(content));
         }
 
         if (layoutType.equals(LayoutType.POPUP) && stage != null) {
@@ -115,16 +111,11 @@ final public class SceneFactory implements ViewEventListenerInterface {
         }
     }
 
-    private ContentViewInterface createView(String moduleName, String viewName, EventObject event, Pane content, Stage stage) {
+    private ContentViewInterface createView(String moduleName, String viewName, Pane content, Stage stage) {
         ModuleConfiguratorInterface moduleConfiguration = config.getConfigForModule(moduleName);
 
         Map<String, ContentViewInterface> moduleViews = moduleConfiguration.getViewEvents(content, stage);
-        ContentViewInterface view = moduleViews.get(viewName);
-        if (view != null) {
-            view.initView(event);
-            return view;
-        }
-        return null;
+        return moduleViews.get(viewName);
     }
 
     private Scene getDefaultSceneTemplate() {
