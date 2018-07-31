@@ -23,8 +23,6 @@ dependencies {
     testRuntime("org.junit.jupiter:junit-jupiter-engine:5.2.0")
 
     compile project(':helper')
-    compile project(':graphics')
-    compile project(':provider')
 }
 
 test {

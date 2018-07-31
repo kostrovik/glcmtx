@@ -1,7 +1,5 @@
 package com.github.kostrovik.kernel.models;
 
-import ru.glance.provider.interfaces.ServerConnectionAddressInterface;
-
 import java.time.LocalDateTime;
 
 /**
@@ -10,7 +8,7 @@ import java.time.LocalDateTime;
  * date:    26/07/2018
  * github:  https://github.com/kostrovik/glcmtx
  */
-public class ServerConnectionAddress implements ServerConnectionAddressInterface {
+public class ServerConnectionAddress {
     private String url;
     private LocalDateTime lastUsage;
     private Boolean isDefault;

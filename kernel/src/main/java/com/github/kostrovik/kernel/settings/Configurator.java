@@ -1,5 +1,9 @@
-package ru.glance.matrix.users.common;
+package com.github.kostrovik.kernel.settings;
 
+import com.github.kostrovik.kernel.dictionaries.ViewTypeDictionary;
+import com.github.kostrovik.kernel.views.ColorThemesListView;
+import com.github.kostrovik.kernel.views.ServerListView;
+import com.github.kostrovik.kernel.views.menu.MenuBuilder;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import ru.glance.helper.common.ApplicationLogger;
@@ -8,10 +12,6 @@ import com.github.kostrovik.kernel.interfaces.controls.ControlBuilderFacadeInter
 import com.github.kostrovik.kernel.interfaces.views.ContentViewInterface;
 import com.github.kostrovik.kernel.interfaces.views.MenuBuilderInterface;
 import com.github.kostrovik.kernel.interfaces.views.ViewEventListenerInterface;
-import ru.glance.matrix.users.dictionaries.ViewTypeDictionary;
-import ru.glance.matrix.users.views.UserEditorView;
-import ru.glance.matrix.users.views.UsersListView;
-import ru.glance.matrix.users.views.menu.MenuBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -60,8 +60,8 @@ final public class Configurator implements ModuleConfiguratorInterface {
         if (views.isEmpty()) {
             synchronized (Configurator.class) {
                 if (views.isEmpty()) {
-                    views.put(ViewTypeDictionary.USERS_LIST.name(), new UsersListView(content));
-                    views.put(ViewTypeDictionary.USER_VIEW.name(), new UserEditorView(content, stage));
+                    views.put(ViewTypeDictionary.COLOR_THEME_LIST.name(), new ColorThemesListView(content, stage));
+                    views.put(ViewTypeDictionary.DATA_BASE_SERVER_LIST.name(), new ServerListView(content, stage));
                 }
             }
         }

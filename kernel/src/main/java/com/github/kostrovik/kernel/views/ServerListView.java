@@ -1,5 +1,8 @@
 package com.github.kostrovik.kernel.views;
 
+import com.github.kostrovik.kernel.graphics.common.ControlBuilderFacade;
+import com.github.kostrovik.kernel.graphics.controls.field.LabeledTextField;
+import com.github.kostrovik.kernel.interfaces.views.PopupWindowInterface;
 import com.github.kostrovik.kernel.models.ServerConnectionAddress;
 import com.github.kostrovik.kernel.settings.ApplicationSettings;
 import javafx.application.Platform;
@@ -21,11 +24,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import ru.glance.matrix.graphics.common.ControlBuilderFacade;
-import ru.glance.matrix.graphics.controls.field.LabeledTextField;
 import ru.glance.helper.common.ApplicationLogger;
-import ru.glance.provider.interfaces.ServerConnectionAddressInterface;
-import ru.glance.provider.interfaces.views.PopupWindowInterface;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -43,9 +42,9 @@ import java.util.stream.Collectors;
 public class ServerListView implements PopupWindowInterface {
     private static Logger logger = ApplicationLogger.getLogger(ServerListView.class.getName());
 
-    private ObservableList<ServerConnectionAddressInterface> data;
+    private ObservableList<ServerConnectionAddress> data;
     private ControlBuilderFacade facade;
-    private TableView<ServerConnectionAddressInterface> table;
+    private TableView<ServerConnectionAddress> table;
     private Stage stage;
     private ApplicationSettings settings;
     private Pane parent;
@@ -157,12 +156,12 @@ public class ServerListView implements PopupWindowInterface {
         table.setEditable(true);
         table.setSelectionModel(null);
 
-        TableColumn<ServerConnectionAddressInterface, String> url = facade.createTableStringColumn("URL сервера", "url");
-        TableColumn<ServerConnectionAddressInterface, LocalDateTime> lastUsage = facade.createTableLocalDateTimeColumn("Последнее соединение", "lastUsage", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
-        TableColumn<ServerConnectionAddressInterface, Boolean> isDefault = facade.createTableBooleanColumn("Установлен по умолчанию", "default");
+        TableColumn<ServerConnectionAddress, String> url = facade.createTableStringColumn("URL сервера", "url");
+        TableColumn<ServerConnectionAddress, LocalDateTime> lastUsage = facade.createTableLocalDateTimeColumn("Последнее соединение", "lastUsage", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
+        TableColumn<ServerConnectionAddress, Boolean> isDefault = facade.createTableBooleanColumn("Установлен по умолчанию", "default");
 
         isDefault.setCellValueFactory(param -> {
-            ServerConnectionAddressInterface value = param.getValue();
+            ServerConnectionAddress value = param.getValue();
             SimpleBooleanProperty booleanProp = new SimpleBooleanProperty(value.isDefault());
             booleanProp.addListener((observable, oldValue, newValue) -> {
                 clearAllSelectioins();
@@ -171,18 +170,15 @@ public class ServerListView implements PopupWindowInterface {
             return booleanProp;
         });
 
-        TableColumn<ServerConnectionAddressInterface, ServerConnectionAddressInterface> action = new TableColumn<>("Действие");
-        Text actionColumnName = new Text(action.getText());
-        actionColumnName.applyCss();
-        action.setMinWidth(actionColumnName.getBoundsInLocal().getWidth() + 10);
+        TableColumn<ServerConnectionAddress, String> action = facade.createTableColumn("Действие");
         action.setCellFactory(new Callback<>() {
             @Override
-            public TableCell<ServerConnectionAddressInterface, ServerConnectionAddressInterface> call(TableColumn<ServerConnectionAddressInterface, ServerConnectionAddressInterface> param) {
-                TableCell<ServerConnectionAddressInterface, ServerConnectionAddressInterface> cell = new TableCell<>() {
+            public TableCell<ServerConnectionAddress, String> call(TableColumn<ServerConnectionAddress, String> param) {
+                TableCell<ServerConnectionAddress, String> cell = new TableCell<>() {
                     Button actionButton = facade.createButton("Удалить");
 
                     @Override
-                    public void updateItem(ServerConnectionAddressInterface item, boolean empty) {
+                    public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
                         if (isEmpty()) {
                             setGraphic(null);
@@ -214,7 +210,7 @@ public class ServerListView implements PopupWindowInterface {
         return table;
     }
 
-    private void removeItem(ServerConnectionAddressInterface item) {
+    private void removeItem(ServerConnectionAddress item) {
         data.remove(item);
     }
 

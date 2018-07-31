@@ -5,7 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
 import ru.glance.helper.common.ApplicationLogger;
 import ru.glance.helper.common.ConfigParser;
-import ru.glance.provider.interfaces.views.MenuBuilderInterface;
+import com.github.kostrovik.kernel.interfaces.views.MenuBuilderInterface;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

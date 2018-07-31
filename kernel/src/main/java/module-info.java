@@ -1,3 +1,5 @@
+import com.github.kostrovik.kernel.settings.Configurator;
+
 /**
  * project: glcmtx
  * author:  kostrovik
@@ -10,19 +12,24 @@ module kernel {
     requires java.logging;
 
     requires helper;
-    requires graphics;
-    requires provider;
 
     exports com.github.kostrovik.kernel.common;
+    exports com.github.kostrovik.kernel.interfaces;
+    exports com.github.kostrovik.kernel.interfaces.controls;
+    exports com.github.kostrovik.kernel.interfaces.views;
+    exports com.github.kostrovik.kernel.graphics.controls.notification;
+    exports com.github.kostrovik.kernel.graphics.controls.field;
+    exports com.github.kostrovik.kernel.graphics.common;
+    exports com.github.kostrovik.kernel.graphics.common.icons;
 
     opens com.github.kostrovik.kernel.models;
 
-    uses ru.glance.provider.interfaces.ModuleConfiguratorInterface;
-    uses ru.glance.provider.interfaces.views.ViewEventListenerInterface;
-    uses ru.glance.provider.interfaces.controls.ControlBuilderFacadeInterface;
+    uses com.github.kostrovik.kernel.interfaces.ModuleConfiguratorInterface;
+    uses com.github.kostrovik.kernel.interfaces.views.ViewEventListenerInterface;
+    uses com.github.kostrovik.kernel.interfaces.controls.ControlBuilderFacadeInterface;
 
-    provides ru.glance.provider.interfaces.ModuleConfiguratorInterface with com.github.kostrovik.kernel.common.Configurator;
-    provides ru.glance.provider.interfaces.ServerConnectionInterface with com.github.kostrovik.kernel.common.ServerConnector;
-    provides ru.glance.provider.interfaces.ApplicationSettingsInterface with com.github.kostrovik.kernel.settings.ApplicationSettings;
-    provides ru.glance.provider.interfaces.views.ViewEventListenerInterface with com.github.kostrovik.kernel.builders.SceneFactory;
+    provides com.github.kostrovik.kernel.interfaces.ModuleConfiguratorInterface with Configurator;
+    provides com.github.kostrovik.kernel.interfaces.ServerConnectionInterface with com.github.kostrovik.kernel.common.ServerConnector;
+    provides com.github.kostrovik.kernel.interfaces.views.ViewEventListenerInterface with com.github.kostrovik.kernel.builders.SceneFactory;
+    provides com.github.kostrovik.kernel.interfaces.controls.ControlBuilderFacadeInterface with com.github.kostrovik.kernel.graphics.common.ControlBuilderFacade;
 }

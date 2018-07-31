@@ -8,7 +8,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import ru.glance.helper.common.ApplicationLogger;
-import ru.glance.provider.interfaces.views.LayoutType;
+import com.github.kostrovik.kernel.interfaces.views.LayoutType;
 
 import java.lang.reflect.Field;
 import java.util.Map;

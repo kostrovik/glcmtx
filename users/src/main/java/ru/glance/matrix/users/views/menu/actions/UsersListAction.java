@@ -2,9 +2,9 @@ package ru.glance.matrix.users.views.menu.actions;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import ru.glance.provider.interfaces.views.LayoutType;
-import ru.glance.provider.interfaces.views.ViewEventInterface;
-import ru.glance.provider.interfaces.views.ViewEventListenerInterface;
+import com.github.kostrovik.kernel.interfaces.views.LayoutType;
+import com.github.kostrovik.kernel.interfaces.views.ViewEventInterface;
+import com.github.kostrovik.kernel.interfaces.views.ViewEventListenerInterface;
 import ru.glance.matrix.users.common.Configurator;
 import ru.glance.matrix.users.dictionaries.ViewTypeDictionary;
 import ru.glance.matrix.users.services.UserService;

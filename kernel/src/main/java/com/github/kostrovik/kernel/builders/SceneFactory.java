@@ -12,8 +12,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ru.glance.helper.common.ApplicationLogger;
-import ru.glance.provider.interfaces.ModuleConfiguratorInterface;
-import ru.glance.provider.interfaces.views.*;
+import com.github.kostrovik.kernel.interfaces.ModuleConfiguratorInterface;
+import com.github.kostrovik.kernel.interfaces.views.*;
 
 import java.util.EventObject;
 import java.util.List;

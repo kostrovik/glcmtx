@@ -9,9 +9,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import ru.glance.matrix.graphics.common.ControlBuilderFacade;
+import com.github.kostrovik.kernel.graphics.common.ControlBuilderFacade;
 import ru.glance.helper.common.ApplicationLogger;
-import ru.glance.provider.interfaces.views.PopupWindowInterface;
+import com.github.kostrovik.kernel.interfaces.views.PopupWindowInterface;
 import ru.glance.matrix.users.models.User;
 
 import java.util.EventObject;

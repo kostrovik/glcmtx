@@ -1,6 +1,6 @@
 package com.github.kostrovik.kernel.views;
 
-import com.github.kostrovik.kernel.common.Configurator;
+import com.github.kostrovik.kernel.settings.Configurator;
 import com.github.kostrovik.kernel.dictionaries.ColorThemeDictionary;
 import com.github.kostrovik.kernel.settings.ApplicationSettings;
 import javafx.geometry.Insets;
@@ -15,8 +15,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ru.glance.helper.common.ApplicationLogger;
-import ru.glance.provider.interfaces.controls.ControlBuilderFacadeInterface;
-import ru.glance.provider.interfaces.views.PopupWindowInterface;
+import com.github.kostrovik.kernel.interfaces.controls.ControlBuilderFacadeInterface;
+import com.github.kostrovik.kernel.interfaces.views.PopupWindowInterface;
 
 import java.util.EventObject;
 import java.util.Objects;

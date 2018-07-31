@@ -5,8 +5,6 @@ import com.github.kostrovik.kernel.dictionaries.ColorThemeDictionary;
 import com.github.kostrovik.kernel.models.ServerConnectionAddress;
 import ru.glance.helper.common.ApplicationLogger;
 import ru.glance.helper.common.ConfigParser;
-import ru.glance.provider.interfaces.ApplicationSettingsInterface;
-import ru.glance.provider.interfaces.ServerConnectionAddressInterface;
 
 import java.io.*;
 import java.net.URI;
@@ -28,21 +26,17 @@ import java.util.stream.Collectors;
  * date:    26/07/2018
  * github:  https://github.com/kostrovik/glcmtx
  */
-public class ApplicationSettings implements ApplicationSettingsInterface {
+public class ApplicationSettings {
     private static Logger logger = ApplicationLogger.getLogger(ApplicationSettings.class.getName());
     private static volatile ApplicationSettings settings;
 
     private Path applicationConfigPath;
     private ConfigParser parser;
-    private ServerConnectionAddressInterface defaultHost;
+    private ServerConnectionAddress defaultHost;
 
     private ApplicationSettings() {
         setPath();
         this.parser = new ConfigParser(readSettings());
-    }
-
-    public static ApplicationSettings provider(){
-        return getInstance();
     }
 
     public static ApplicationSettings getInstance() {
@@ -56,10 +50,10 @@ public class ApplicationSettings implements ApplicationSettingsInterface {
         return settings;
     }
 
-    public List<ServerConnectionAddressInterface> getHosts() {
+    public List<ServerConnectionAddress> getHosts() {
         Map<String, Object> config = parser.getConfig();
         String defaultAddress = (String) config.getOrDefault("defaultHost", "");
-        List<ServerConnectionAddressInterface> addreses = new ArrayList<>();
+        List<ServerConnectionAddress> addreses = new ArrayList<>();
 
         List<String> hosts = Arrays.asList(((String) config.getOrDefault("hosts", "")).split(","));
 
@@ -70,15 +64,17 @@ public class ApplicationSettings implements ApplicationSettingsInterface {
                 address.setDefault(true);
             }
 
-            addreses.add(address);
+            if (!address.getUrl().isEmpty()) {
+                addreses.add(address);
+            }
         }
 
         return addreses;
     }
 
-    public ServerConnectionAddressInterface getDefaultHost() {
+    public ServerConnectionAddress getDefaultHost() {
         if (defaultHost == null) {
-            Optional<ServerConnectionAddressInterface> host = getHosts().stream().filter(ServerConnectionAddressInterface::isDefault).findFirst();
+            Optional<ServerConnectionAddress> host = getHosts().stream().filter(ServerConnectionAddress::isDefault).findFirst();
             host.ifPresent(serverConnectionAddress -> defaultHost = serverConnectionAddress);
         }
 
@@ -89,7 +85,7 @@ public class ApplicationSettings implements ApplicationSettingsInterface {
         return defaultHost;
     }
 
-    public void saveHostsList(List<ServerConnectionAddressInterface> hosts) {
+    public void saveHostsList(List<ServerConnectionAddress> hosts) {
         Properties properties = readSettings();
         properties.setProperty("hosts", String.join(",", hosts.stream().map(host -> {
             if (host.isDefault()) {
