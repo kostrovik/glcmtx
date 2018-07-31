@@ -25,7 +25,6 @@ dependencies {
     compile project(':helper')
     compile project(':graphics')
     compile project(':provider')
-    compile project(':users')
 }
 
 test {

@@ -2,7 +2,7 @@
  * В данном массиве необходимо объявить все модули которые должны быть залинкованы в общую сборку.
  * Дальше из этого массива создаются команды для очисти и сборки модулей, а так же команда для сборки JRE.
  */
-def modules = ['kernel', 'helper', 'graphics']
+def modules = ['kernel', 'helper', 'graphics', 'provider', 'users']
 
 // создание команд для очистки модулей
 def cleaners = []
@@ -56,5 +56,6 @@ task addLauncher(type: Copy) {
 def java_home = System.getenv('JAVA_HOME')
 task link(type: Exec) {
     commandLine "${java_home}/bin/jlink", '--module-path', "${java_home}/jmods:modules",
-            '--add-modules', modules.join(","), '--launcher', "ApplicationLauncher=kernel/com.github.kostrovik.kernel.common.AppCore", '--output', 'javaImageBuild'
+            '--add-modules', modules.join(","), '--launcher', "ApplicationLauncher=kernel/com.github.kostrovik.kernel.common.AppCore",
+            '--output', 'javaImageBuild'
 }

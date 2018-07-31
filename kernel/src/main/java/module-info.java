@@ -12,7 +12,6 @@ module kernel {
     requires helper;
     requires graphics;
     requires provider;
-    requires users;
 
     exports com.github.kostrovik.kernel.common;
 
