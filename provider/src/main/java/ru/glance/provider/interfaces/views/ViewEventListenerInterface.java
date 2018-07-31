@@ -1,6 +1,4 @@
-package ru.glance.matrix.provider.interfaces.views;
-
-import ru.glance.matrix.provider.interfaces.views.ViewEventInterface;
+package ru.glance.provider.interfaces.views;
 
 /**
  * project: glcmtx

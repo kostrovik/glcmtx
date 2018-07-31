@@ -1,4 +1,4 @@
-package ru.glance.matrix.helper.common;
+package ru.glance.helper.common;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

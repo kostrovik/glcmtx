@@ -1,7 +1,7 @@
 package com.github.kostrovik.kernel.builders;
 
-import ru.glance.matrix.helper.common.ApplicationLogger;
-import ru.glance.matrix.provider.interfaces.ModuleConfiguratorInterface;
+import ru.glance.helper.common.ApplicationLogger;
+import ru.glance.provider.interfaces.ModuleConfiguratorInterface;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

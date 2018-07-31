@@ -1,6 +1,6 @@
 package ru.glance.matrix.graphics.common;
 
-import ru.glance.matrix.provider.interfaces.controls.IconPositionInterface;
+import ru.glance.provider.interfaces.controls.IconPositionInterface;
 
 /**
  * project: glcmtx

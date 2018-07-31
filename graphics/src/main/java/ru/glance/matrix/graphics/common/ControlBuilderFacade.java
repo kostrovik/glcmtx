@@ -10,9 +10,9 @@ import ru.glance.matrix.graphics.builders.TableFormBuilder;
 import ru.glance.matrix.graphics.common.icons.SolidIcons;
 import ru.glance.matrix.graphics.controls.field.LabeledTextField;
 import ru.glance.matrix.graphics.controls.notification.Notification;
-import ru.glance.matrix.provider.interfaces.controls.ControlBuilderFacadeInterface;
-import ru.glance.matrix.provider.interfaces.controls.IconInterface;
-import ru.glance.matrix.provider.interfaces.controls.IconPositionInterface;
+import ru.glance.provider.interfaces.controls.ControlBuilderFacadeInterface;
+import ru.glance.provider.interfaces.controls.IconInterface;
+import ru.glance.provider.interfaces.controls.IconPositionInterface;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

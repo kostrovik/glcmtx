@@ -17,5 +17,5 @@ module graphics {
     exports ru.glance.matrix.graphics.controls.notification;
     exports ru.glance.matrix.graphics.controls.field;
 
-    provides ru.glance.matrix.provider.interfaces.controls.ControlBuilderFacadeInterface with ru.glance.matrix.graphics.common.ControlBuilderFacade;
+    provides ru.glance.provider.interfaces.controls.ControlBuilderFacadeInterface with ru.glance.matrix.graphics.common.ControlBuilderFacade;
 }

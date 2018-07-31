@@ -14,9 +14,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import ru.glance.matrix.helper.common.ApplicationLogger;
-import ru.glance.matrix.provider.interfaces.controls.ControlBuilderFacadeInterface;
-import ru.glance.matrix.provider.interfaces.views.PopupWindowInterface;
+import ru.glance.helper.common.ApplicationLogger;
+import ru.glance.provider.interfaces.controls.ControlBuilderFacadeInterface;
+import ru.glance.provider.interfaces.views.PopupWindowInterface;
 
 import java.util.EventObject;
 import java.util.Objects;
@@ -43,7 +43,7 @@ public class ColorThemesListView implements PopupWindowInterface {
         this.stage = stage;
         this.settings = ApplicationSettings.getInstance();
         this.parent = parent;
-        this.selectedTheme = settings.getDetaultTheme();
+        this.selectedTheme = settings.getDefaultColorTheme();
         this.configurator = Configurator.getConfig();
         this.facade = Objects.requireNonNull(configurator.getControlBuilder());
         this.view = createView();
@@ -51,7 +51,7 @@ public class ColorThemesListView implements PopupWindowInterface {
 
     @Override
     public void initView(EventObject event) {
-        selectedTheme = settings.getDetaultTheme();
+        selectedTheme = settings.getDefaultColorTheme();
     }
 
     @Override

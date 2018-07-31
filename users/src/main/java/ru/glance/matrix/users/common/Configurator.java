@@ -2,12 +2,12 @@ package ru.glance.matrix.users.common;
 
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import ru.glance.matrix.helper.common.ApplicationLogger;
-import ru.glance.matrix.provider.interfaces.ModuleConfiguratorInterface;
-import ru.glance.matrix.provider.interfaces.controls.ControlBuilderFacadeInterface;
-import ru.glance.matrix.provider.interfaces.views.ContentViewInterface;
-import ru.glance.matrix.provider.interfaces.views.MenuBuilderInterface;
-import ru.glance.matrix.provider.interfaces.views.ViewEventListenerInterface;
+import ru.glance.helper.common.ApplicationLogger;
+import ru.glance.provider.interfaces.ModuleConfiguratorInterface;
+import ru.glance.provider.interfaces.controls.ControlBuilderFacadeInterface;
+import ru.glance.provider.interfaces.views.ContentViewInterface;
+import ru.glance.provider.interfaces.views.MenuBuilderInterface;
+import ru.glance.provider.interfaces.views.ViewEventListenerInterface;
 import ru.glance.matrix.users.dictionaries.ViewTypeDictionary;
 import ru.glance.matrix.users.views.UserEditorView;
 import ru.glance.matrix.users.views.UsersListView;

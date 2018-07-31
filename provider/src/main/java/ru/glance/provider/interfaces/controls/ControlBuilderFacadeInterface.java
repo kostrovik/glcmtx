@@ -1,4 +1,4 @@
-package ru.glance.matrix.provider.interfaces.controls;
+package ru.glance.provider.interfaces.controls;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Skinnable;

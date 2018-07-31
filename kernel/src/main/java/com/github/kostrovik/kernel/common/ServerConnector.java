@@ -1,7 +1,7 @@
 package com.github.kostrovik.kernel.common;
 
-import ru.glance.matrix.helper.common.ApplicationLogger;
-import ru.glance.matrix.provider.interfaces.ServerConnectionInterface;
+import ru.glance.helper.common.ApplicationLogger;
+import ru.glance.provider.interfaces.ServerConnectionInterface;
 
 import java.io.IOException;
 import java.io.InputStreamReader;

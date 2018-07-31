@@ -3,10 +3,10 @@ package com.github.kostrovik.kernel.settings;
 import com.github.kostrovik.kernel.builders.SceneFactory;
 import com.github.kostrovik.kernel.dictionaries.ColorThemeDictionary;
 import com.github.kostrovik.kernel.models.ServerConnectionAddress;
-import ru.glance.matrix.helper.common.ApplicationLogger;
-import ru.glance.matrix.helper.common.ConfigParser;
-import ru.glance.matrix.provider.interfaces.ApplicationSettingsInterface;
-import ru.glance.matrix.provider.interfaces.ServerConnectionAddressInterface;
+import ru.glance.helper.common.ApplicationLogger;
+import ru.glance.helper.common.ConfigParser;
+import ru.glance.provider.interfaces.ApplicationSettingsInterface;
+import ru.glance.provider.interfaces.ServerConnectionAddressInterface;
 
 import java.io.*;
 import java.net.URI;
@@ -118,7 +118,7 @@ public class ApplicationSettings implements ApplicationSettingsInterface {
         parser = new ConfigParser(readSettings());
     }
 
-    public String getDetaultTheme() {
+    public String getDefaultColorTheme() {
         Object colorTheme = parser.getConfigProperty("colorTheme");
         return colorTheme != null ? (String) colorTheme : ColorThemeDictionary.LIGHT.getThemeName();
     }

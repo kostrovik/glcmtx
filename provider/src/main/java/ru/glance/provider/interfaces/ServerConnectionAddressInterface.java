@@ -1,4 +1,4 @@
-package ru.glance.matrix.provider.interfaces;
+package ru.glance.provider.interfaces;
 
 import java.time.LocalDateTime;
 

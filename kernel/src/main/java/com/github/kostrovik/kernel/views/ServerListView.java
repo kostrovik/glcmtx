@@ -23,9 +23,9 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import ru.glance.matrix.graphics.common.ControlBuilderFacade;
 import ru.glance.matrix.graphics.controls.field.LabeledTextField;
-import ru.glance.matrix.helper.common.ApplicationLogger;
-import ru.glance.matrix.provider.interfaces.ServerConnectionAddressInterface;
-import ru.glance.matrix.provider.interfaces.views.PopupWindowInterface;
+import ru.glance.helper.common.ApplicationLogger;
+import ru.glance.provider.interfaces.ServerConnectionAddressInterface;
+import ru.glance.provider.interfaces.views.PopupWindowInterface;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

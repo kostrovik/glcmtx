@@ -1,4 +1,4 @@
-package ru.glance.matrix.provider.interfaces.views;
+package ru.glance.provider.interfaces.views;
 
 /**
  * project: glcmtx

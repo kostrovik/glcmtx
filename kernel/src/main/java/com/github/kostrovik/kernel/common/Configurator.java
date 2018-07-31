@@ -6,12 +6,12 @@ import com.github.kostrovik.kernel.views.ServerListView;
 import com.github.kostrovik.kernel.views.menu.MenuBuilder;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import ru.glance.matrix.helper.common.ApplicationLogger;
-import ru.glance.matrix.provider.interfaces.ModuleConfiguratorInterface;
-import ru.glance.matrix.provider.interfaces.controls.ControlBuilderFacadeInterface;
-import ru.glance.matrix.provider.interfaces.views.ContentViewInterface;
-import ru.glance.matrix.provider.interfaces.views.MenuBuilderInterface;
-import ru.glance.matrix.provider.interfaces.views.ViewEventListenerInterface;
+import ru.glance.helper.common.ApplicationLogger;
+import ru.glance.provider.interfaces.ModuleConfiguratorInterface;
+import ru.glance.provider.interfaces.controls.ControlBuilderFacadeInterface;
+import ru.glance.provider.interfaces.views.ContentViewInterface;
+import ru.glance.provider.interfaces.views.MenuBuilderInterface;
+import ru.glance.provider.interfaces.views.ViewEventListenerInterface;
 
 import java.util.HashMap;
 import java.util.Map;

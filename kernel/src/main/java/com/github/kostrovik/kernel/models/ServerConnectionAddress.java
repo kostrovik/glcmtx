@@ -1,6 +1,6 @@
 package com.github.kostrovik.kernel.models;
 
-import ru.glance.matrix.provider.interfaces.ServerConnectionAddressInterface;
+import ru.glance.provider.interfaces.ServerConnectionAddressInterface;
 
 import java.time.LocalDateTime;
 

@@ -1,4 +1,4 @@
-package ru.glance.matrix.provider.interfaces.views;
+package ru.glance.provider.interfaces.controls;
 
 /**
  * project: glcmtx
@@ -6,8 +6,5 @@ package ru.glance.matrix.provider.interfaces.views;
  * date:    30/07/2018
  * github:  https://github.com/kostrovik/glcmtx
  */
-public enum LayoutType {
-    DEFAULT,
-    TAB,
-    POPUP
+public interface IconPositionInterface {
 }

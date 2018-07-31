@@ -1,4 +1,4 @@
-package ru.glance.matrix.helper.common;
+package ru.glance.helper.common;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

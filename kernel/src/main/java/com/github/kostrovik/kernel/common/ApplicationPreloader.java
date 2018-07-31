@@ -21,11 +21,11 @@ import javafx.stage.StageStyle;
 import ru.glance.matrix.graphics.common.icons.SolidIcons;
 import ru.glance.matrix.graphics.controls.notification.Notification;
 import ru.glance.matrix.graphics.controls.notification.NotificationType;
-import ru.glance.matrix.helper.common.ApplicationLogger;
-import ru.glance.matrix.provider.interfaces.controls.ControlBuilderFacadeInterface;
-import ru.glance.matrix.provider.interfaces.views.LayoutType;
-import ru.glance.matrix.provider.interfaces.views.ViewEventInterface;
-import ru.glance.matrix.provider.interfaces.views.ViewEventListenerInterface;
+import ru.glance.helper.common.ApplicationLogger;
+import ru.glance.provider.interfaces.controls.ControlBuilderFacadeInterface;
+import ru.glance.provider.interfaces.views.LayoutType;
+import ru.glance.provider.interfaces.views.ViewEventInterface;
+import ru.glance.provider.interfaces.views.ViewEventListenerInterface;
 
 import java.util.EventObject;
 import java.util.HashMap;
@@ -118,7 +118,7 @@ public class ApplicationPreloader extends Preloader {
 
         try {
             preloader.getStylesheets().add(Class.forName(this.getClass().getName()).getResource("/styles/preloader.css").toExternalForm());
-            preloader.getStylesheets().add(Class.forName(this.getClass().getName()).getResource(String.format("/styles/themes/%s", settings.getDetaultTheme())).toExternalForm());
+            preloader.getStylesheets().add(Class.forName(this.getClass().getName()).getResource(String.format("/styles/themes/%s", settings.getDefaultColorTheme())).toExternalForm());
         } catch (ClassNotFoundException error) {
             logger.log(Level.WARNING, "Ошибка загрузки изображения для preloader.", error);
         }
@@ -182,7 +182,7 @@ public class ApplicationPreloader extends Preloader {
 
             @Override
             public Object getEventData() {
-                return settings.getDetaultTheme();
+                return settings.getDefaultColorTheme();
             }
 
             @Override

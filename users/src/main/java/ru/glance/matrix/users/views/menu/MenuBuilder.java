@@ -3,9 +3,9 @@ package ru.glance.matrix.users.views.menu;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
-import ru.glance.matrix.helper.common.ApplicationLogger;
-import ru.glance.matrix.helper.common.ConfigParser;
-import ru.glance.matrix.provider.interfaces.views.MenuBuilderInterface;
+import ru.glance.helper.common.ApplicationLogger;
+import ru.glance.helper.common.ConfigParser;
+import ru.glance.provider.interfaces.views.MenuBuilderInterface;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

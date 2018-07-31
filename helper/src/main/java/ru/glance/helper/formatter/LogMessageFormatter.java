@@ -1,4 +1,4 @@
-package ru.glance.matrix.helper.formatter;
+package ru.glance.helper.formatter;
 
 import java.util.logging.LogRecord;
 import java.util.logging.SimpleFormatter;

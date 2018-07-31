@@ -1,6 +1,6 @@
-package ru.glance.matrix.helper.common;
+package ru.glance.helper.common;
 
-import ru.glance.matrix.helper.formatter.LogMessageFormatter;
+import ru.glance.helper.formatter.LogMessageFormatter;
 
 import java.io.IOException;
 import java.net.URI;

@@ -11,9 +11,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import ru.glance.matrix.helper.common.ApplicationLogger;
-import ru.glance.matrix.provider.interfaces.ModuleConfiguratorInterface;
-import ru.glance.matrix.provider.interfaces.views.*;
+import ru.glance.helper.common.ApplicationLogger;
+import ru.glance.provider.interfaces.ModuleConfiguratorInterface;
+import ru.glance.provider.interfaces.views.*;
 
 import java.util.EventObject;
 import java.util.List;
@@ -132,7 +132,7 @@ final public class SceneFactory implements ViewEventListenerInterface {
         content.prefHeightProperty().bind(vbox.heightProperty());
 
         try {
-            scene.getStylesheets().add(Class.forName(this.getClass().getName()).getResource(String.format("/styles/themes/%s", settings.getDetaultTheme())).toExternalForm());
+            scene.getStylesheets().add(Class.forName(this.getClass().getName()).getResource(String.format("/styles/themes/%s", settings.getDefaultColorTheme())).toExternalForm());
         } catch (ClassNotFoundException error) {
             logger.log(Level.WARNING, "Ошибка загрузки стилей.", error);
         }
@@ -155,7 +155,7 @@ final public class SceneFactory implements ViewEventListenerInterface {
         content.prefHeightProperty().bind(vbox.heightProperty());
 
         try {
-            scene.getStylesheets().add(Class.forName(this.getClass().getName()).getResource(String.format("/styles/themes/%s", settings.getDetaultTheme())).toExternalForm());
+            scene.getStylesheets().add(Class.forName(this.getClass().getName()).getResource(String.format("/styles/themes/%s", settings.getDefaultColorTheme())).toExternalForm());
         } catch (ClassNotFoundException error) {
             logger.log(Level.WARNING, "Ошибка загрузки стилей.", error);
         }

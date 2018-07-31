@@ -7,7 +7,7 @@
 module provider {
     requires javafx.controls;
 
-    exports ru.glance.matrix.provider.interfaces;
-    exports ru.glance.matrix.provider.interfaces.views;
-    exports ru.glance.matrix.provider.interfaces.controls;
+    exports ru.glance.provider.interfaces;
+    exports ru.glance.provider.interfaces.views;
+    exports ru.glance.provider.interfaces.controls;
 }

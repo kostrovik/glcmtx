@@ -6,7 +6,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
 import ru.glance.matrix.graphics.helper.PropertyReference;
-import ru.glance.matrix.helper.common.ApplicationLogger;
+import ru.glance.helper.common.ApplicationLogger;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

@@ -1,7 +1,7 @@
 package ru.glance.matrix.users.services;
 
-import ru.glance.matrix.helper.common.ApplicationLogger;
-import ru.glance.matrix.provider.interfaces.ServerConnectionInterface;
+import ru.glance.helper.common.ApplicationLogger;
+import ru.glance.provider.interfaces.ServerConnectionInterface;
 
 import java.util.Optional;
 import java.util.ServiceLoader;

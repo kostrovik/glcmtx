@@ -1,6 +1,6 @@
 package ru.glance.matrix.graphics.config;
 
-import ru.glance.matrix.helper.common.ApplicationLogger;
+import ru.glance.helper.common.ApplicationLogger;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

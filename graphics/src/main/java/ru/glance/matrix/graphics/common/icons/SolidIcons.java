@@ -2,7 +2,7 @@ package ru.glance.matrix.graphics.common.icons;
 
 import javafx.scene.text.Font;
 import ru.glance.matrix.graphics.config.ModuleSettings;
-import ru.glance.matrix.provider.interfaces.controls.IconInterface;
+import ru.glance.provider.interfaces.controls.IconInterface;
 
 /**
  * Словарь иконок.

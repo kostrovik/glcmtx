@@ -1,4 +1,4 @@
-package ru.glance.matrix.provider.interfaces;
+package ru.glance.provider.interfaces;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public interface ApplicationSettingsInterface {
 
     void updateHostLastUsage();
 
-    String getDetaultTheme();
+    String getDefaultColorTheme();
 
     void saveDefaultColorTheme(String theme);
 }

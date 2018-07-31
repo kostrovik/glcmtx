@@ -17,12 +17,12 @@ module kernel {
 
     opens com.github.kostrovik.kernel.models;
 
-    uses ru.glance.matrix.provider.interfaces.ModuleConfiguratorInterface;
-    uses ru.glance.matrix.provider.interfaces.views.ViewEventListenerInterface;
-    uses ru.glance.matrix.provider.interfaces.controls.ControlBuilderFacadeInterface;
+    uses ru.glance.provider.interfaces.ModuleConfiguratorInterface;
+    uses ru.glance.provider.interfaces.views.ViewEventListenerInterface;
+    uses ru.glance.provider.interfaces.controls.ControlBuilderFacadeInterface;
 
-    provides ru.glance.matrix.provider.interfaces.ModuleConfiguratorInterface with com.github.kostrovik.kernel.common.Configurator;
-    provides ru.glance.matrix.provider.interfaces.ServerConnectionInterface with com.github.kostrovik.kernel.common.ServerConnector;
-    provides ru.glance.matrix.provider.interfaces.ApplicationSettingsInterface with com.github.kostrovik.kernel.settings.ApplicationSettings;
-    provides ru.glance.matrix.provider.interfaces.views.ViewEventListenerInterface with com.github.kostrovik.kernel.builders.SceneFactory;
+    provides ru.glance.provider.interfaces.ModuleConfiguratorInterface with com.github.kostrovik.kernel.common.Configurator;
+    provides ru.glance.provider.interfaces.ServerConnectionInterface with com.github.kostrovik.kernel.common.ServerConnector;
+    provides ru.glance.provider.interfaces.ApplicationSettingsInterface with com.github.kostrovik.kernel.settings.ApplicationSettings;
+    provides ru.glance.provider.interfaces.views.ViewEventListenerInterface with com.github.kostrovik.kernel.builders.SceneFactory;
 }

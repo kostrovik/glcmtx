@@ -2,9 +2,9 @@ package ru.glance.matrix.users.views.menu.actions;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import ru.glance.matrix.provider.interfaces.views.LayoutType;
-import ru.glance.matrix.provider.interfaces.views.ViewEventInterface;
-import ru.glance.matrix.provider.interfaces.views.ViewEventListenerInterface;
+import ru.glance.provider.interfaces.views.LayoutType;
+import ru.glance.provider.interfaces.views.ViewEventInterface;
+import ru.glance.provider.interfaces.views.ViewEventListenerInterface;
 import ru.glance.matrix.users.common.Configurator;
 import ru.glance.matrix.users.dictionaries.ViewTypeDictionary;
 import ru.glance.matrix.users.services.UserService;
