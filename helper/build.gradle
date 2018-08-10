@@ -1,8 +1,10 @@
 plugins {
     id 'java'
+    id 'idea'
+    id 'maven-publish'
 }
 
-group 'com.github.kostrovik'
+group 'ru.glance.helper'
 version '1.0-SNAPSHOT'
 def moduleName = 'helper'
 
@@ -19,10 +21,18 @@ repositories {
 dependencies {
     testCompile("org.junit.jupiter:junit-jupiter-api:5.2.0")
     testRuntime("org.junit.jupiter:junit-jupiter-engine:5.2.0")
+
+    compile 'com.github.kostrovik:kernel:1.0-SNAPSHOT'
 }
 
 test {
     useJUnitPlatform()
+}
+
+idea {
+    module {
+        inheritOutputDirs = true
+    }
 }
 
 jar {
@@ -44,7 +54,14 @@ compileJava {
     }
 }
 
-// задание на перемещение скомпилированного модуля в нужную директорию для дальнейшей линковки
-tasks.withType(Jar) {
-    destinationDir = file("./../modules/")
+task addDependencies(type: Copy) {
+    from configurations.runtime
+    into "build/libs"
+}
+
+task copyToLib(type: Copy) {
+    from 'build/libs'
+    into "./../modules/"
+
+    dependsOn addDependencies
 }

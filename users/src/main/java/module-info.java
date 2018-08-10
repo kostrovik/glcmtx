@@ -8,9 +8,8 @@ module users {
     requires java.logging;
     requires javafx.controls;
 
-    requires helper;
-    requires provider;
-    requires graphics;
+    requires kernel;
+    requires com.fasterxml.jackson.core;
 
     exports ru.glance.matrix.users.common;
     exports ru.glance.matrix.users.views;
@@ -19,9 +18,10 @@ module users {
 
     opens ru.glance.matrix.users.models;
 
-    uses ru.glance.matrix.provider.interfaces.ServerConnectionInterface;
-    uses ru.glance.matrix.provider.interfaces.ApplicationSettingsInterface;
-    uses ru.glance.matrix.provider.interfaces.views.ViewEventListenerInterface;
+    uses com.github.kostrovik.kernel.interfaces.ServerConnectionInterface;
+    uses com.github.kostrovik.kernel.interfaces.views.ViewEventListenerInterface;
+    uses com.github.kostrovik.kernel.interfaces.controls.ControlBuilderFacadeInterface;
+    uses com.github.kostrovik.kernel.interfaces.ApplicationLoggerInterface;
 
-    provides ru.glance.matrix.provider.interfaces.ModuleConfiguratorInterface with ru.glance.matrix.users.common.Configurator;
+    provides com.github.kostrovik.kernel.interfaces.ModuleConfiguratorInterface with ru.glance.matrix.users.common.Configurator;
 }

@@ -1,12 +1,13 @@
 plugins {
     id 'java'
-    id 'maven-publish'
     id 'idea'
+    id 'maven-publish'
 }
 
 group 'ru.glance.matrix'
 version '1.0-SNAPSHOT'
-def moduleName = 'users'
+def moduleName = 'startup'
+def launcherClassName = 'ru.glance.matrix.startup.common.AppCore'
 
 sourceCompatibility = 10
 targetCompatibility = 10
@@ -23,7 +24,6 @@ dependencies {
     testRuntime("org.junit.jupiter:junit-jupiter-engine:5.2.0")
 
     compile 'com.github.kostrovik:kernel:1.0-SNAPSHOT'
-    compile 'jackson:core:2.9.6'
 }
 
 test {
@@ -40,6 +40,7 @@ jar {
     inputs.property("moduleName", moduleName)
     manifest {
         attributes(
+                'Main-Class': launcherClassName,
                 'Automatic-Module-Name': moduleName,
         )
     }

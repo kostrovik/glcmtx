@@ -1,23 +1,20 @@
 package ru.glance.matrix.users.views.menu;
 
+import com.github.kostrovik.kernel.common.ConfigParser;
+import com.github.kostrovik.kernel.interfaces.views.MenuBuilderInterface;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.MenuItem;
-import ru.glance.matrix.helper.common.ApplicationLogger;
-import ru.glance.matrix.helper.common.ConfigParser;
-import ru.glance.matrix.provider.interfaces.views.MenuBuilderInterface;
+import ru.glance.matrix.users.common.Configurator;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.charset.Charset;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,12 +25,11 @@ import java.util.logging.Logger;
  * github:  https://github.com/kostrovik/glcmtx
  */
 public class MenuBuilder implements MenuBuilderInterface {
-    private static Logger logger = ApplicationLogger.getLogger(MenuBuilder.class.getName());
-    private final static String defaultConfigFilePath = "/ru/glance/matrix/users/configurations/menu_config.properties";
+    private static Logger logger = Configurator.getConfig().getLogger(MenuBuilder.class.getName());
     private ConfigParser parser;
 
     public MenuBuilder() {
-        this.parser = new ConfigParser(loadConfig());
+        this.parser = new ConfigParser(getPath());
     }
 
     @Override
@@ -78,19 +74,15 @@ public class MenuBuilder implements MenuBuilderInterface {
         return action;
     }
 
-    private Properties loadConfig() {
-        Properties config = new Properties();
-
-        try (InputStream inputStream = Class.forName(this.getClass().getName()).getResourceAsStream(defaultConfigFilePath)) {
-            config.load(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
-        } catch (ClassNotFoundException error) {
-            logger.log(Level.SEVERE, "Не возможно найти класс", error);
-        } catch (FileNotFoundException error) {
-            logger.log(Level.SEVERE, String.format("Модуль: %s. Не найден файл конфигурации по умолчанию: %s.", this.getClass().getModule().getName(), defaultConfigFilePath), error);
-        } catch (IOException error) {
-            logger.log(Level.SEVERE, String.format("Модуль: %s. Не возможно загрузить настройки умолчанию: %s.", this.getClass().getModule().getName(), defaultConfigFilePath), error);
+    private URI getPath() {
+        URI applicationConfigPath = null;
+        try {
+            URL moduleResource = Class.forName(MenuBuilder.class.getName()).getResource("/ru/glance/matrix/users/configurations/menu_config.yaml");
+            applicationConfigPath = moduleResource.toURI();
+        } catch (URISyntaxException | ClassNotFoundException e) {
+            logger.log(Level.SEVERE, "Ошибка получения настроек.", e);
         }
 
-        return config;
+        return applicationConfigPath;
     }
 }

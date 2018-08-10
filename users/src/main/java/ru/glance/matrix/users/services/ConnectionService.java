@@ -1,7 +1,7 @@
 package ru.glance.matrix.users.services;
 
-import ru.glance.matrix.helper.common.ApplicationLogger;
-import ru.glance.matrix.provider.interfaces.ServerConnectionInterface;
+import com.github.kostrovik.kernel.interfaces.ServerConnectionInterface;
+import ru.glance.matrix.users.common.Configurator;
 
 import java.util.Optional;
 import java.util.ServiceLoader;
@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * github:  https://github.com/kostrovik/glcmtx
  */
 public class ConnectionService {
-    private static Logger logger = ApplicationLogger.getLogger(ConnectionService.class.getName());
+    private static Logger logger = Configurator.getConfig().getLogger(ConnectionService.class.getName());
     private static ServerConnectionInterface connection;
     private static volatile ConnectionService service;
 

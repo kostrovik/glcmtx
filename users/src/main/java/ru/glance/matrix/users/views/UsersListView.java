@@ -12,12 +12,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import ru.glance.matrix.graphics.common.ControlBuilderFacade;
-import ru.glance.matrix.helper.common.ApplicationLogger;
-import ru.glance.matrix.provider.interfaces.views.ContentViewInterface;
-import ru.glance.matrix.provider.interfaces.views.LayoutType;
-import ru.glance.matrix.provider.interfaces.views.ViewEventInterface;
-import ru.glance.matrix.provider.interfaces.views.ViewEventListenerInterface;
+import com.github.kostrovik.kernel.graphics.common.ControlBuilderFacade;
+import com.github.kostrovik.kernel.interfaces.views.ContentViewInterface;
+import com.github.kostrovik.kernel.interfaces.views.LayoutType;
+import com.github.kostrovik.kernel.interfaces.views.ViewEventInterface;
+import com.github.kostrovik.kernel.interfaces.views.ViewEventListenerInterface;
 import ru.glance.matrix.users.common.Configurator;
 import ru.glance.matrix.users.dictionaries.ViewTypeDictionary;
 import ru.glance.matrix.users.models.User;
@@ -35,7 +34,7 @@ import java.util.stream.Collectors;
  * github:  https://github.com/kostrovik/glcmtx
  */
 public class UsersListView implements ContentViewInterface {
-    private static Logger logger = ApplicationLogger.getLogger(UsersListView.class.getName());
+    private static Logger logger = Configurator.getConfig().getLogger(UsersListView.class.getName());
     private Pane parent;
     private ObservableList<User> data;
     private ControlBuilderFacade facade;
@@ -127,7 +126,7 @@ public class UsersListView implements ContentViewInterface {
     }
 
     private void showUserEditor(User user) {
-        Configurator configurator = new Configurator();
+        Configurator configurator = Configurator.getConfig();
         ViewEventListenerInterface listener = configurator.getEventListener();
         listener.handle(new ViewEventInterface() {
             @Override

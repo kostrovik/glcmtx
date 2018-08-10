@@ -2,9 +2,9 @@ package ru.glance.matrix.users.views.menu.actions;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import ru.glance.matrix.provider.interfaces.views.LayoutType;
-import ru.glance.matrix.provider.interfaces.views.ViewEventInterface;
-import ru.glance.matrix.provider.interfaces.views.ViewEventListenerInterface;
+import com.github.kostrovik.kernel.interfaces.views.LayoutType;
+import com.github.kostrovik.kernel.interfaces.views.ViewEventInterface;
+import com.github.kostrovik.kernel.interfaces.views.ViewEventListenerInterface;
 import ru.glance.matrix.users.common.Configurator;
 import ru.glance.matrix.users.dictionaries.ViewTypeDictionary;
 import ru.glance.matrix.users.services.UserService;
@@ -24,7 +24,7 @@ public class UsersListAction implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent event) {
-        Configurator configurator = new Configurator();
+        Configurator configurator = Configurator.getConfig();
         ViewEventListenerInterface listener = configurator.getEventListener();
         listener.handle(new ViewEventInterface() {
             @Override
