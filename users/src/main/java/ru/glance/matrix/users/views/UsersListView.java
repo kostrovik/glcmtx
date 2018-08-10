@@ -13,7 +13,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import com.github.kostrovik.kernel.graphics.common.ControlBuilderFacade;
-import ru.glance.helper.common.ApplicationLogger;
 import com.github.kostrovik.kernel.interfaces.views.ContentViewInterface;
 import com.github.kostrovik.kernel.interfaces.views.LayoutType;
 import com.github.kostrovik.kernel.interfaces.views.ViewEventInterface;
@@ -35,7 +34,7 @@ import java.util.stream.Collectors;
  * github:  https://github.com/kostrovik/glcmtx
  */
 public class UsersListView implements ContentViewInterface {
-    private static Logger logger = ApplicationLogger.getLogger(UsersListView.class.getName());
+    private static Logger logger = Configurator.getConfig().getLogger(UsersListView.class.getName());
     private Pane parent;
     private ObservableList<User> data;
     private ControlBuilderFacade facade;

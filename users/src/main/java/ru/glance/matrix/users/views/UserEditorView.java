@@ -10,8 +10,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import com.github.kostrovik.kernel.graphics.common.ControlBuilderFacade;
-import ru.glance.helper.common.ApplicationLogger;
 import com.github.kostrovik.kernel.interfaces.views.PopupWindowInterface;
+import ru.glance.matrix.users.common.Configurator;
 import ru.glance.matrix.users.models.User;
 
 import java.util.EventObject;
@@ -24,7 +24,7 @@ import java.util.logging.Logger;
  * github:  https://github.com/kostrovik/glcmtx
  */
 public class UserEditorView implements PopupWindowInterface {
-    private static Logger logger = ApplicationLogger.getLogger(UserEditorView.class.getName());
+    private static Logger logger = Configurator.getConfig().getLogger(UserEditorView.class.getName());
 
     private ControlBuilderFacade facade;
     private Stage stage;

@@ -6,6 +6,9 @@
  */
 module helper {
     requires java.logging;
+    requires kernel;
 
     exports ru.glance.helper.common;
+
+    provides com.github.kostrovik.kernel.interfaces.ApplicationLoggerInterface with ru.glance.helper.common.ApplicationLogger;
 }

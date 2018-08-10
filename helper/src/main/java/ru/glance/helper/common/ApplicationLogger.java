@@ -1,5 +1,6 @@
 package ru.glance.helper.common;
 
+import com.github.kostrovik.kernel.interfaces.ApplicationLoggerInterface;
 import ru.glance.helper.formatter.LogMessageFormatter;
 
 import java.io.IOException;
@@ -16,20 +17,16 @@ import java.util.logging.Logger;
 
 /**
  * Класс настройка логгера для приложения.
- *
+ * <p>
  * project: glcmtx
  * author:  kostrovik
  * date:    19/07/2018
  * github:  https://github.com/kostrovik/glcmtx
  */
-public class ApplicationLogger extends Logger {
+public class ApplicationLogger implements ApplicationLoggerInterface {
     private static volatile FileHandler fileHandler;
 
-    private ApplicationLogger(String name, String resourceBundleName) {
-        super(name, resourceBundleName);
-    }
-
-    public static Logger getLogger(String name) {
+    public Logger getLogger(String name) {
         Logger logger = Logger.getLogger(name);
 
         createLoggerFile();

@@ -1,4 +1,4 @@
-package ru.glance.matrix.users.common;
+package ru.glance.matrix.startup.common;
 
 import com.github.kostrovik.kernel.interfaces.ApplicationLoggerInterface;
 import com.github.kostrovik.kernel.interfaces.ModuleConfiguratorInterface;
@@ -8,10 +8,10 @@ import com.github.kostrovik.kernel.interfaces.views.MenuBuilderInterface;
 import com.github.kostrovik.kernel.interfaces.views.ViewEventListenerInterface;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import ru.glance.matrix.users.dictionaries.ViewTypeDictionary;
-import ru.glance.matrix.users.views.UserEditorView;
-import ru.glance.matrix.users.views.UsersListView;
-import ru.glance.matrix.users.views.menu.MenuBuilder;
+import ru.glance.matrix.startup.dictionaries.ViewTypeDictionary;
+import ru.glance.matrix.startup.views.ColorThemesListView;
+import ru.glance.matrix.startup.views.ServerListView;
+import ru.glance.matrix.startup.views.menu.MenuBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,10 +23,10 @@ import java.util.logging.Logger;
 /**
  * project: glcmtx
  * author:  kostrovik
- * date:    23/07/2018
+ * date:    09/08/2018
  * github:  https://github.com/kostrovik/glcmtx
  */
-final public class Configurator implements ModuleConfiguratorInterface {
+public class Configurator implements ModuleConfiguratorInterface {
     private static Logger logger;
     private static volatile Configurator configurator;
     private static Map<String, ContentViewInterface> views;
@@ -61,12 +61,11 @@ final public class Configurator implements ModuleConfiguratorInterface {
         if (views.isEmpty()) {
             synchronized (Configurator.class) {
                 if (views.isEmpty()) {
-                    views.put(ViewTypeDictionary.USERS_LIST.name(), new UsersListView(content));
-                    views.put(ViewTypeDictionary.USER_VIEW.name(), new UserEditorView(content, stage));
+                    views.put(ViewTypeDictionary.COLOR_THEME_LIST.name(), new ColorThemesListView(content, stage));
+                    views.put(ViewTypeDictionary.DATA_BASE_SERVER_LIST.name(), new ServerListView(content, stage));
                 }
             }
         }
-
         return views;
     }
 

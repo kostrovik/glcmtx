@@ -1,0 +1,6 @@
+menu:
+  builder: ru.glance.matrix.users.views.menu.MenuBuilder
+  items:
+    usersList:
+      title: Пользователи
+      action: ru.glance.matrix.users.views.menu.actions.UsersListAction
